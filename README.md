@@ -2,7 +2,9 @@
 <img src="download.webp" title="tktx online">
 
 <a href="https://tktxonline.com.br/">TKTX Online</a> 
+
 <a href="https://galeriadapele.com.br/">Galeria da Pele</a> 
+
 <a href="https://tabacariadaquebrada.com.br/">Tabacaria da Quebrada</a> 
 
 ## Estoque e Lote
