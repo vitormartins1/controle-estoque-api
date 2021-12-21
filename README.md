@@ -1,6 +1,10 @@
 # Sistema de Gerenciamento de Estoque, Fornecedores e Revendedores
 <img src="download.webp" title="tktx online">
 
+<a href="https://tktxonline.com.br/">TKTX Online</a> 
+<a href="https://galeriadapele.com.br/">Galeria da Pele</a> 
+<a href="https://tabacariadaquebrada.com.br/">Tabacaria da Quebrada</a> 
+
 ## Estoque e Lote
 
 O estoque é dividido em lotes que tem uma data de inicio quando são criados referente a chegada dos produtos na loja. O lote também armazena a quantidade de cada produto que chegou.
