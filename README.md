@@ -1,5 +1,37 @@
 # Sistema de Gerenciamento de Estoque, Fornecedores e Revendedores
 
+## Entradas no estoque:
+  - Compras => De Fornecedores ou da fabrica
+  - Vendas => Que Retornaram (Devoluções, CEP Inexistene, Destinatário não Encontrado)
+  - 
+## Saidas do estoque:
+  - Vendas => Para Clientes do Site
+  - Vendas => Para Clientes do WP
+  - Vendas => Para Clientes Avulsos
+  - Vendas => Para Revendedores
+  - Consignado => Para Revendedores (Status: Pendente, Pago, Quantidade Pendente e Quantidade Paga em quantidade de produtos.
+  - Danificados => Produtos danificados no estoque ou durante o transporte ou que passaram da validade
+ 
+## Usuarios:
+  - Administrador (Acesso de criação de compras)
+  - Funcionario
+
+## Modelos
+  - Venda
+  - ItemVenda
+  - Produto
+  - Cliente
+  - Revendedor
+  - Consignado
+  - ItemConsignado
+  - Danificado
+  - ItemDanificado
+  - Compra
+  - ItemCompra
+  - Fornecedor
+  - Estoque
+  - Lote
+  
 - Cadastro de produto
 - Cadastro de fornecedores
 - Cadastro de Clientes
