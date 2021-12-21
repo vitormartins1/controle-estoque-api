@@ -51,6 +51,8 @@ Compra tem uma relação de um para muitos com Lote, pois uma compra pode ter va
 - Estoque
 - Lote
   
+## Features
+  
 - Cadastro de produto
 - Cadastro de fornecedores
 - Cadastro de Clientes
