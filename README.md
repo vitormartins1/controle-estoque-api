@@ -41,7 +41,7 @@ Compra tem uma relação de um para muitos com Lote, pois uma compra pode ter va
 - Funcionario (Entradas e baixas no estoque)
 - Revendedor (Solicitação de Venda ou Consignado)
 
-## Modelos
+## Entity Relationship
 
 <img src="EstoqueEntityRelationshipDiagram.png" title="tktx online">
 
