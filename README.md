@@ -1,7 +1,6 @@
 # Sistema de Gerenciamento de Estoque, Fornecedores e Revendedores
 <img src="download.webp" title="tktx online">
 
-
 - <a href="https://tktxonline.com.br/">TKTX Online</a> 
 
 - <a href="https://galeriadapele.com.br/">Galeria da Pele</a> 
@@ -43,6 +42,8 @@ Compra tem uma relação de um para muitos com Lote, pois uma compra pode ter va
 - Revendedor (Solicitação de Venda ou Consignado)
 
 ## Modelos
+
+<img src="EstoqueEntityRelationshipDiagram.png" title="tktx online">
 
 - Venda
 - ItemVenda
