@@ -33,13 +33,6 @@ namespace Estoque.DATA.Maps
                 .WithOne()
                 .HasForeignKey<ItemVenda>(i => i.IdProduto)
                 .HasConstraintName("FK_ItemVenda_Produto");
-
-
-            //builder
-            //    .HasMany()
-            //    .HasForeignKey(i => i.IdVenda)
-            //    .HasConstraintName("FK_Venda_ItemVendas");
-
         }
     }
 }

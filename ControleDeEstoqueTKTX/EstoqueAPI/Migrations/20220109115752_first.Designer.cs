@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EstoqueAPI.Migrations
 {
     [DbContext(typeof(EstoqueContext))]
-    [Migration("20220109043621_gfgf")]
-    partial class gfgf
+    [Migration("20220109115752_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -78,8 +78,8 @@ namespace EstoqueAPI.Migrations
 
                     b.Property<string>("DescricaoProduto")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasMaxLength(450)
+                        .HasColumnType("VARCHAR(450)");
 
                     b.Property<string>("NomeProduto")
                         .IsRequired()

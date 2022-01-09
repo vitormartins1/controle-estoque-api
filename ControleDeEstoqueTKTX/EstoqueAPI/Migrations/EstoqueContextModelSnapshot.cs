@@ -76,8 +76,8 @@ namespace EstoqueAPI.Migrations
 
                     b.Property<string>("DescricaoProduto")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasMaxLength(450)
+                        .HasColumnType("VARCHAR(450)");
 
                     b.Property<string>("NomeProduto")
                         .IsRequired()

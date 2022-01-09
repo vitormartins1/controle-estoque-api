@@ -17,26 +17,23 @@ namespace Estoque.DATA.Maps
                 .IsRequired()
                 .ValueGeneratedOnAdd();
 
-            //builder.Property<string>(p => p.NomeProduto)
-            //    .IsRequired()
-            //    .HasColumnType("VARCHAR")
-            //    .HasMaxLength(50);
+            builder
+                .Property(p => p.NomeProduto)
+                .IsRequired();
 
-            //builder.Property<double>(p => p.ValorProduto)
-            //    .IsRequired()
-            //    .HasColumnType("DOUBLE")
-            //    .HasMaxLength(9999999);
+            builder.Property(p => p.ValorProduto)
+                .IsRequired();
 
-            //builder.Property<int>(p => p.QuantidadeEstoque)
+            //builder.Property(p => p.QuantidadeEstoque)
             //    .HasColumnType("INT");
 
-            //builder.Property<int>(p => p.QuantidadeVendas)
+            //builder.Property(p => p.QuantidadeVendas)
             //    .HasColumnType("INT");
 
-            //builder.Property<string>(P => P.DescricaoProduto)
-            //    .IsRequired()
-            //    .HasColumnType("VARCHAR")
-            //    .HasMaxLength(450);
+            builder.Property(P => P.DescricaoProduto)
+                .IsRequired()
+                .HasColumnType("VARCHAR")
+                .HasMaxLength(450);
 
         }
     }

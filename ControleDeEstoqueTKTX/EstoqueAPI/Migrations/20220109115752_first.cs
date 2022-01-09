@@ -4,7 +4,7 @@
 
 namespace EstoqueAPI.Migrations
 {
-    public partial class gfgf : Migration
+    public partial class first : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -25,13 +25,13 @@ namespace EstoqueAPI.Migrations
                 name: "Produto",
                 columns: table => new
                 {
-                    IdProduto = table.Column<int>(type: "integer", nullable: false)
+                    IdProduto = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NomeProduto = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     ValorProduto = table.Column<double>(type: "float", nullable: false),
                     QuantidadeEstoque = table.Column<int>(type: "int", nullable: false),
                     QuantidadeVendas = table.Column<int>(type: "int", nullable: false),
-                    DescricaoProduto = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false)
+                    DescricaoProduto = table.Column<string>(type: "VARCHAR(450)", maxLength: 450, nullable: false)
                 },
                 constraints: table =>
                 {
