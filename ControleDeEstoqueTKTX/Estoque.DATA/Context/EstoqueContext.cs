@@ -1,9 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Estoque.DATA.Maps;
+using Estoque.DOMAIN.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Estoque.DATA.Context
 {
@@ -13,12 +10,17 @@ namespace Estoque.DATA.Context
             DbContextOptions<EstoqueContext> options
             ) : base(options) { }
 
+        public DbSet<Venda> Venda { get; set; }
+        public DbSet<Cliente> Cliente { get; set; }
+        //public DbSet<ItemVenda> ItemVenda { get; set; }
+        //public DbSet<Produto> Produto { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder
-            //    .Entity<Estoque>()
-            //    .Property(e => e.Name)
-            //    .HasMaxLength(200);
+            modelBuilder.ApplyConfiguration(new VendaMap());
+            modelBuilder.ApplyConfiguration(new ClienteMap());
+            modelBuilder.ApplyConfiguration(new ItemVendaMap());
+            modelBuilder.ApplyConfiguration(new ProdutoMap());
         }
 
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)

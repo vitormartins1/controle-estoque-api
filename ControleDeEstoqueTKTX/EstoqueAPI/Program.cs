@@ -6,7 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<EstoqueContext>(
     options => options.UseSqlServer(
-        builder.Configuration.GetConnectionString("EstoqueDBConnection")));
+        builder.Configuration.GetConnectionString("EstoqueDBConnection"),
+        b => b.MigrationsAssembly("EstoqueAPI")));
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
