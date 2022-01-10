@@ -17,15 +17,15 @@ namespace Estoque.DATA.Maps
                 .ValueGeneratedOnAdd();
 
             builder
-                .Property<int>(i => i.IdVenda)
+                .Property(i => i.IdVenda)
                 .IsRequired();
 
             builder
-                .Property<int>(i => i.IdProduto)
+                .Property(i => i.IdProduto)
                 .IsRequired();
 
             builder
-                .Property<int>(i => i.Quantidade)
+                .Property(i => i.Quantidade)
                 .IsRequired();
 
             builder
