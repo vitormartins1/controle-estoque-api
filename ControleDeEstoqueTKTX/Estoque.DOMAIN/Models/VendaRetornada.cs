@@ -10,6 +10,6 @@ namespace Estoque.DOMAIN.Models
     {
         public int IdVendaRetornada { get; set; }
         public int IdVenda { get; set; }
-        public virtual ICollection<ItemRetornado>? ItemRetornados { get; set; }
+        public virtual ICollection<ItemRetornado> ItemRetornados { get; set; }
     }
 }

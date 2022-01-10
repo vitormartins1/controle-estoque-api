@@ -10,7 +10,7 @@ namespace Estoque.DATA.Context
             DbContextOptions<EstoqueContext> options
             ) : base(options) { }
 
-        public DbSet<Venda> Venda { get; set; }
+        public DbSet<Compra> Venda { get; set; }
         public DbSet<Cliente> Cliente { get; set; }
         //public DbSet<ItemVenda> ItemVenda { get; set; }
         //public DbSet<Produto> Produto { get; set; }
