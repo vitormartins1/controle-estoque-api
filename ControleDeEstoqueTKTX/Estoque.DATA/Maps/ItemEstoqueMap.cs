@@ -10,23 +10,23 @@ namespace Estoque.DATA.Maps
         {
             builder
                 .ToTable(nameof(ItemEstoque))
-                .HasKey(i => i.IdItemEstoque);
+                .HasKey(i => i.ItemEstoqueId);
 
             builder
-                .Property(i => i.IdItemEstoque)
+                .Property(i => i.ItemEstoqueId)
                 .ValueGeneratedOnAdd();
 
-            builder
-                .Property(i => i.IdLote)
-                .IsRequired();
+            //builder
+            //    .Property(i => i.IdLote)
+            //    .IsRequired();
 
-            builder
-                .Property(i => i.IdCompra)
-                .IsRequired();
+            //builder
+            //    .Property(i => i.IdCompra)
+            //    .IsRequired();
 
-            builder
-                .Property(i => i.IdProduto)
-                .IsRequired();
+            //builder
+            //    .Property(i => i.IdProduto)
+            //    .IsRequired();
 
             builder
                 .Property(i => i.Quantidade)
@@ -37,6 +37,12 @@ namespace Estoque.DATA.Maps
                 .WithOne()
                 .HasForeignKey<ItemEstoque>(i => i.IdProduto)
                 .HasConstraintName("FK_ItemEstoque_Produto");
+
+            //builder
+            //    .HasOne<Lote>(i => i.Lote)
+            //    .WithMany(l => l.ItemsEstoque)
+            //    .HasForeignKey(i => i.IdLote)
+            //    .HasConstraintName("FK_Lote_ItemsEstoque");
         }
 
     }

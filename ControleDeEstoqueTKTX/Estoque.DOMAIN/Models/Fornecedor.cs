@@ -8,7 +8,7 @@ namespace Estoque.DOMAIN.Models
 {
     public class Fornecedor
     {
-        public int IdFornecedor { get; set; }
+        public int FornecedorId { get; set; }
         public string NomeFornecedor { get;}
         public virtual ICollection<Compra> Compras { get; set; }
     }

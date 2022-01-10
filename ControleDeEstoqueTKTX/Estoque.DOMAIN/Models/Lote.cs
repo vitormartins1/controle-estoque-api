@@ -8,8 +8,8 @@ namespace Estoque.DOMAIN.Models
 {
     public class Lote
     {
-        public int IdLote { get; set; }
-        public int IdCompra { get; set; }
+        public int LoteId { get; set; }
+        public int CompraId { get; set; }
         public Compra Compra { get; set; }
         public virtual ICollection<ItemEstoque> ItemsEstoque { get; set; }
         public DateTime DataDeEntrada { get; set; }

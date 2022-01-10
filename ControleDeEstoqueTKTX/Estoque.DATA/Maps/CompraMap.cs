@@ -10,10 +10,10 @@ namespace Estoque.DATA.Maps
         {
             builder
                 .ToTable(nameof(Compra))
-                .HasKey(c => c.IdCompra);
+                .HasKey(c => c.CompraId);
 
             builder
-                .Property(c => c.IdCompra)
+                .Property(c => c.CompraId)
                 .ValueGeneratedOnAdd();
 
             builder
@@ -36,8 +36,8 @@ namespace Estoque.DATA.Maps
 
             builder
                 .HasMany<Lote>(compra => compra.Lotes)
-                .WithOne()
-                .HasForeignKey(lote => lote.IdCompra)
+                .WithOne(lote => lote.Compra)
+                .HasForeignKey(lote => lote.CompraId)
                 .HasConstraintName("FK_Compra_Lotes");
         }
     }

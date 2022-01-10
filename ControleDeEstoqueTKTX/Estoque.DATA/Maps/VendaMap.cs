@@ -10,10 +10,10 @@ namespace Estoque.DATA.Maps
         {
             builder
                 .ToTable(nameof(Venda))
-                .HasKey(v => v.IdVenda);
+                .HasKey(v => v.VendaId);
 
             builder
-                .Property(v => v.IdVenda)
+                .Property(v => v.VendaId)
                 .ValueGeneratedOnAdd();
 
             builder

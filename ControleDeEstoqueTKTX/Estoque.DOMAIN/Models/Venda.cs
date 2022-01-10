@@ -5,7 +5,7 @@ namespace Estoque.DOMAIN.Models
 {
     public class Venda
     {
-        public int IdVenda { get; set; }
+        public int VendaId { get; set; }
         public string? NumeroPedido { get; set; }
         public int IdCliente { get; set; }
         public TipoVenda TipoVenda { get; set; }

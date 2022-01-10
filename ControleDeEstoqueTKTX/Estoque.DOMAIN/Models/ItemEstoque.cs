@@ -8,8 +8,8 @@ namespace Estoque.DOMAIN.Models
 {
     public class ItemEstoque
     {
-        public int IdItemEstoque { get; set; }
-        public int IdLote { get; set; }
+        public int ItemEstoqueId { get; set; }
+        public int LoteId { get; set; }
         public int IdCompra { get; set; }
         public int IdProduto { get; set; }
         public int Quantidade { get; set; }

@@ -10,17 +10,26 @@ namespace Estoque.DATA.Context
             DbContextOptions<EstoqueContext> options
             ) : base(options) { }
 
-        public DbSet<Compra> Venda { get; set; }
         public DbSet<Cliente> Cliente { get; set; }
-        //public DbSet<ItemVenda> ItemVenda { get; set; }
-        //public DbSet<Produto> Produto { get; set; }
+        public DbSet<Compra> Compra { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new VendaMap());
             modelBuilder.ApplyConfiguration(new ClienteMap());
+            modelBuilder.ApplyConfiguration(new CompraMap());
+            //modelBuilder.ApplyConfiguration(new ConsignadoMap());
+            //modelBuilder.ApplyConfiguration(new EstoqueMap());
+            modelBuilder.ApplyConfiguration(new FornecedorMap());
+            //modelBuilder.ApplyConfiguration(new ItemConsignadoMap());
+            modelBuilder.ApplyConfiguration(new ItemDanificadoMap());
+            modelBuilder.ApplyConfiguration(new ItemEstoqueMap());
+            modelBuilder.ApplyConfiguration(new ItemRetornadoMap());
             modelBuilder.ApplyConfiguration(new ItemVendaMap());
+            modelBuilder.ApplyConfiguration(new LoteMap());
             modelBuilder.ApplyConfiguration(new ProdutoMap());
+            //modelBuilder.ApplyConfiguration(new RevendedorMap());
+            modelBuilder.ApplyConfiguration(new VendaMap());
+            modelBuilder.ApplyConfiguration(new VendaRetornadaMap());
         }
 
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
