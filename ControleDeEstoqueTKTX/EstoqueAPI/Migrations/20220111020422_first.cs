@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EstoqueAPI.Migrations
 {
-    public partial class oioi : Migration
+    public partial class first : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,76 +13,99 @@ namespace EstoqueAPI.Migrations
                 name: "Cliente",
                 columns: table => new
                 {
-                    IdCliente = table.Column<int>(type: "integer", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "VARCHAR(35)", maxLength: 35, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cliente", x => x.IdCliente);
+                    table.PrimaryKey("PK_Cliente", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Estoque",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Estoque", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Fornecedor",
                 columns: table => new
                 {
-                    FornecedorId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NomeFornecedor = table.Column<string>(type: "VARCHAR(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Fornecedor", x => x.FornecedorId);
+                    table.PrimaryKey("PK_Fornecedor", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Produto",
                 columns: table => new
                 {
-                    IdProduto = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NomeProduto = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     ValorProduto = table.Column<double>(type: "float", nullable: false),
-                    QuantidadeEstoque = table.Column<int>(type: "int", nullable: false),
-                    QuantidadeVendas = table.Column<int>(type: "int", nullable: false),
                     DescricaoProduto = table.Column<string>(type: "VARCHAR(450)", maxLength: 450, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Produto", x => x.IdProduto);
+                    table.PrimaryKey("PK_Produto", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Revendedor",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(type: "VARCHAR(35)", maxLength: 35, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Revendedor", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "VendaRetornada",
                 columns: table => new
                 {
-                    IdVendaRetornada = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdVenda = table.Column<int>(type: "int", nullable: false)
+                    VendaId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_VendaRetornada", x => x.IdVendaRetornada);
+                    table.PrimaryKey("PK_VendaRetornada", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Venda",
                 columns: table => new
                 {
-                    VendaId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NumeroPedido = table.Column<string>(type: "VARCHAR(13)", maxLength: 13, nullable: true),
-                    IdCliente = table.Column<int>(type: "integer", nullable: false),
+                    ClienteId = table.Column<int>(type: "integer", nullable: false),
                     TipoVenda = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Venda", x => x.VendaId);
+                    table.PrimaryKey("PK_Venda", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Cliente_Vendas",
-                        column: x => x.IdCliente,
+                        column: x => x.ClienteId,
                         principalTable: "Cliente",
-                        principalColumn: "IdCliente",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -90,19 +113,19 @@ namespace EstoqueAPI.Migrations
                 name: "Compra",
                 columns: table => new
                 {
-                    CompraId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Invoice = table.Column<string>(type: "VARCHAR(43)", maxLength: 43, nullable: true),
-                    IdFornecedor = table.Column<int>(type: "int", nullable: false)
+                    FornecedorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Compra", x => x.CompraId);
+                    table.PrimaryKey("PK_Compra", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Fornecedor_Compras",
-                        column: x => x.IdFornecedor,
+                        column: x => x.FornecedorId,
                         principalTable: "Fornecedor",
-                        principalColumn: "FornecedorId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -110,21 +133,40 @@ namespace EstoqueAPI.Migrations
                 name: "ItemDanificado",
                 columns: table => new
                 {
-                    IdItemDanificado = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdVenda = table.Column<int>(type: "int", nullable: true),
-                    IdLote = table.Column<int>(type: "int", nullable: true),
-                    IdProduto = table.Column<int>(type: "int", nullable: false),
+                    VendaId = table.Column<int>(type: "int", nullable: true),
+                    LoteId = table.Column<int>(type: "int", nullable: true),
+                    ProdutoId = table.Column<int>(type: "int", nullable: false),
                     Quantidade = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ItemDanificado", x => x.IdItemDanificado);
+                    table.PrimaryKey("PK_ItemDanificado", x => x.Id);
                     table.ForeignKey(
                         name: "FK_ItemDanificado_Produto",
-                        column: x => x.IdProduto,
+                        column: x => x.ProdutoId,
                         principalTable: "Produto",
-                        principalColumn: "IdProduto",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Consignado",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RevendedorId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Consignado", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Revendedor_Consignados",
+                        column: x => x.RevendedorId,
+                        principalTable: "Revendedor",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -132,26 +174,26 @@ namespace EstoqueAPI.Migrations
                 name: "ItemRetornado",
                 columns: table => new
                 {
-                    IdItemRetornado = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdVendaRetornada = table.Column<int>(type: "int", nullable: false),
-                    IdProduto = table.Column<int>(type: "int", nullable: false),
+                    VendaRetornadaId = table.Column<int>(type: "int", nullable: false),
+                    ProdutoId = table.Column<int>(type: "int", nullable: false),
                     Quantidade = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ItemRetornado", x => x.IdItemRetornado);
+                    table.PrimaryKey("PK_ItemRetornado", x => x.Id);
                     table.ForeignKey(
                         name: "FK_ItemRetornado_Produto",
-                        column: x => x.IdProduto,
+                        column: x => x.ProdutoId,
                         principalTable: "Produto",
-                        principalColumn: "IdProduto",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_VendaRetornada_ItemRetornados",
-                        column: x => x.IdVendaRetornada,
+                        column: x => x.VendaRetornadaId,
                         principalTable: "VendaRetornada",
-                        principalColumn: "IdVendaRetornada",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -161,8 +203,8 @@ namespace EstoqueAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    IdVenda = table.Column<int>(type: "int", nullable: false),
-                    IdProduto = table.Column<int>(type: "int", nullable: false),
+                    VendaId = table.Column<int>(type: "int", nullable: false),
+                    ProdutoId = table.Column<int>(type: "int", nullable: false),
                     Quantidade = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -170,15 +212,15 @@ namespace EstoqueAPI.Migrations
                     table.PrimaryKey("PK_ItemVenda", x => x.Id);
                     table.ForeignKey(
                         name: "FK_ItemVenda_Produto",
-                        column: x => x.IdProduto,
+                        column: x => x.ProdutoId,
                         principalTable: "Produto",
-                        principalColumn: "IdProduto",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Venda_ItemVendas",
-                        column: x => x.IdVenda,
+                        column: x => x.VendaId,
                         principalTable: "Venda",
-                        principalColumn: "VendaId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -186,19 +228,46 @@ namespace EstoqueAPI.Migrations
                 name: "Lote",
                 columns: table => new
                 {
-                    LoteId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CompraId = table.Column<int>(type: "int", nullable: false),
                     DataDeEntrada = table.Column<DateTime>(type: "SMALLDATETIME", nullable: false, defaultValueSql: "GETDATE()")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Lote", x => x.LoteId);
+                    table.PrimaryKey("PK_Lote", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Compra_Lotes",
                         column: x => x.CompraId,
                         principalTable: "Compra",
-                        principalColumn: "CompraId",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ItemConsignado",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ConsignadoId = table.Column<int>(type: "int", nullable: false),
+                    ProdutoId = table.Column<int>(type: "int", nullable: false),
+                    Quantidade = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ItemConsignado", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Consignado_ItemConsignados",
+                        column: x => x.ConsignadoId,
+                        principalTable: "Consignado",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ItemConsignado_Produto",
+                        column: x => x.ProdutoId,
+                        principalTable: "Produto",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -206,57 +275,67 @@ namespace EstoqueAPI.Migrations
                 name: "ItemEstoque",
                 columns: table => new
                 {
-                    ItemEstoqueId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     LoteId = table.Column<int>(type: "int", nullable: false),
-                    IdCompra = table.Column<int>(type: "int", nullable: false),
-                    IdProduto = table.Column<int>(type: "int", nullable: false),
+                    CompraId = table.Column<int>(type: "int", nullable: false),
+                    ProdutoId = table.Column<int>(type: "int", nullable: false),
                     Quantidade = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ItemEstoque", x => x.ItemEstoqueId);
+                    table.PrimaryKey("PK_ItemEstoque", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Compra_ItemsEstoque",
-                        column: x => x.IdCompra,
+                        column: x => x.CompraId,
                         principalTable: "Compra",
-                        principalColumn: "CompraId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ItemEstoque_Produto",
-                        column: x => x.IdProduto,
+                        column: x => x.ProdutoId,
                         principalTable: "Produto",
-                        principalColumn: "IdProduto",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Lote_ItemsEstoque",
                         column: x => x.LoteId,
                         principalTable: "Lote",
-                        principalColumn: "LoteId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Compra_IdFornecedor",
+                name: "IX_Compra_FornecedorId",
                 table: "Compra",
-                column: "IdFornecedor");
+                column: "FornecedorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ItemDanificado_IdProduto",
+                name: "IX_Consignado_RevendedorId",
+                table: "Consignado",
+                column: "RevendedorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ItemConsignado_ConsignadoId",
+                table: "ItemConsignado",
+                column: "ConsignadoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ItemConsignado_ProdutoId",
+                table: "ItemConsignado",
+                column: "ProdutoId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ItemDanificado_ProdutoId",
                 table: "ItemDanificado",
-                column: "IdProduto",
+                column: "ProdutoId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_ItemEstoque_IdCompra",
+                name: "IX_ItemEstoque_CompraId",
                 table: "ItemEstoque",
-                column: "IdCompra");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ItemEstoque_IdProduto",
-                table: "ItemEstoque",
-                column: "IdProduto",
-                unique: true);
+                column: "CompraId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ItemEstoque_LoteId",
@@ -264,26 +343,32 @@ namespace EstoqueAPI.Migrations
                 column: "LoteId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ItemRetornado_IdProduto",
-                table: "ItemRetornado",
-                column: "IdProduto",
+                name: "IX_ItemEstoque_ProdutoId",
+                table: "ItemEstoque",
+                column: "ProdutoId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_ItemRetornado_IdVendaRetornada",
+                name: "IX_ItemRetornado_ProdutoId",
                 table: "ItemRetornado",
-                column: "IdVendaRetornada");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ItemVenda_IdProduto",
-                table: "ItemVenda",
-                column: "IdProduto",
+                column: "ProdutoId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_ItemVenda_IdVenda",
+                name: "IX_ItemRetornado_VendaRetornadaId",
+                table: "ItemRetornado",
+                column: "VendaRetornadaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ItemVenda_ProdutoId",
                 table: "ItemVenda",
-                column: "IdVenda");
+                column: "ProdutoId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ItemVenda_VendaId",
+                table: "ItemVenda",
+                column: "VendaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Lote_CompraId",
@@ -291,13 +376,19 @@ namespace EstoqueAPI.Migrations
                 column: "CompraId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Venda_IdCliente",
+                name: "IX_Venda_ClienteId",
                 table: "Venda",
-                column: "IdCliente");
+                column: "ClienteId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Estoque");
+
+            migrationBuilder.DropTable(
+                name: "ItemConsignado");
+
             migrationBuilder.DropTable(
                 name: "ItemDanificado");
 
@@ -311,6 +402,9 @@ namespace EstoqueAPI.Migrations
                 name: "ItemVenda");
 
             migrationBuilder.DropTable(
+                name: "Consignado");
+
+            migrationBuilder.DropTable(
                 name: "Lote");
 
             migrationBuilder.DropTable(
@@ -321,6 +415,9 @@ namespace EstoqueAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "Venda");
+
+            migrationBuilder.DropTable(
+                name: "Revendedor");
 
             migrationBuilder.DropTable(
                 name: "Compra");

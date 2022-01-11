@@ -25,7 +25,7 @@ namespace Estoque.DATA.Maps
                 .IsRequired();
 
             builder
-                .Property(i => i.Produto)
+                .Property(i => i.ProdutoId)
                 .IsRequired();
 
             builder

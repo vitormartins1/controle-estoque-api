@@ -24,85 +24,143 @@ namespace EstoqueAPI.Migrations
 
             modelBuilder.Entity("Estoque.DOMAIN.Models.Cliente", b =>
                 {
-                    b.Property<int>("IdCliente")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdCliente"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(35)
                         .HasColumnType("VARCHAR(35)");
 
-                    b.HasKey("IdCliente");
+                    b.HasKey("Id");
 
                     b.ToTable("Cliente", (string)null);
                 });
 
             modelBuilder.Entity("Estoque.DOMAIN.Models.Compra", b =>
                 {
-                    b.Property<int>("CompraId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CompraId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("IdFornecedor")
+                    b.Property<int>("FornecedorId")
                         .HasColumnType("int");
 
                     b.Property<string>("Invoice")
                         .HasMaxLength(43)
                         .HasColumnType("VARCHAR(43)");
 
-                    b.HasKey("CompraId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("IdFornecedor");
+                    b.HasIndex("FornecedorId");
 
                     b.ToTable("Compra", (string)null);
                 });
 
-            modelBuilder.Entity("Estoque.DOMAIN.Models.Fornecedor", b =>
+            modelBuilder.Entity("Estoque.DOMAIN.Models.Consignado", b =>
                 {
-                    b.Property<int>("FornecedorId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FornecedorId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("RevendedorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RevendedorId");
+
+                    b.ToTable("Consignado", (string)null);
+                });
+
+            modelBuilder.Entity("Estoque.DOMAIN.Models.Estoque", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Estoque", (string)null);
+                });
+
+            modelBuilder.Entity("Estoque.DOMAIN.Models.Fornecedor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("NomeFornecedor")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("VARCHAR(50)");
 
-                    b.HasKey("FornecedorId");
+                    b.HasKey("Id");
 
                     b.ToTable("Fornecedor", (string)null);
                 });
 
-            modelBuilder.Entity("Estoque.DOMAIN.Models.ItemDanificado", b =>
+            modelBuilder.Entity("Estoque.DOMAIN.Models.ItemConsignado", b =>
                 {
-                    b.Property<int>("IdItemDanificado")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdItemDanificado"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("IdLote")
+                    b.Property<int>("ConsignadoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdProduto")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("IdVenda")
+                    b.Property<int>("ProdutoId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
-                    b.HasKey("IdItemDanificado");
+                    b.HasKey("Id");
 
-                    b.HasIndex("IdProduto")
+                    b.HasIndex("ConsignadoId");
+
+                    b.HasIndex("ProdutoId")
+                        .IsUnique();
+
+                    b.ToTable("ItemConsignado", (string)null);
+                });
+
+            modelBuilder.Entity("Estoque.DOMAIN.Models.ItemDanificado", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("LoteId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProdutoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("VendaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProdutoId")
                         .IsUnique();
 
                     b.ToTable("ItemDanificado", (string)null);
@@ -110,59 +168,59 @@ namespace EstoqueAPI.Migrations
 
             modelBuilder.Entity("Estoque.DOMAIN.Models.ItemEstoque", b =>
                 {
-                    b.Property<int>("ItemEstoqueId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ItemEstoqueId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("IdCompra")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdProduto")
+                    b.Property<int>("CompraId")
                         .HasColumnType("int");
 
                     b.Property<int>("LoteId")
                         .HasColumnType("int");
 
+                    b.Property<int>("ProdutoId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
-                    b.HasKey("ItemEstoqueId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("IdCompra");
-
-                    b.HasIndex("IdProduto")
-                        .IsUnique();
+                    b.HasIndex("CompraId");
 
                     b.HasIndex("LoteId");
+
+                    b.HasIndex("ProdutoId")
+                        .IsUnique();
 
                     b.ToTable("ItemEstoque", (string)null);
                 });
 
             modelBuilder.Entity("Estoque.DOMAIN.Models.ItemRetornado", b =>
                 {
-                    b.Property<int>("IdItemRetornado")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdItemRetornado"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("IdProduto")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdVendaRetornada")
+                    b.Property<int>("ProdutoId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
-                    b.HasKey("IdItemRetornado");
+                    b.Property<int>("VendaRetornadaId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("IdProduto")
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProdutoId")
                         .IsUnique();
 
-                    b.HasIndex("IdVendaRetornada");
+                    b.HasIndex("VendaRetornadaId");
 
                     b.ToTable("ItemRetornado", (string)null);
                 });
@@ -175,32 +233,32 @@ namespace EstoqueAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("IdProduto")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdVenda")
+                    b.Property<int>("ProdutoId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
+                    b.Property<int>("VendaId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("IdProduto")
+                    b.HasIndex("ProdutoId")
                         .IsUnique();
 
-                    b.HasIndex("IdVenda");
+                    b.HasIndex("VendaId");
 
                     b.ToTable("ItemVenda", (string)null);
                 });
 
             modelBuilder.Entity("Estoque.DOMAIN.Models.Lote", b =>
                 {
-                    b.Property<int>("LoteId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LoteId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("CompraId")
                         .HasColumnType("int");
@@ -208,10 +266,9 @@ namespace EstoqueAPI.Migrations
                     b.Property<DateTime>("DataDeEntrada")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("SMALLDATETIME")
-                        .HasColumnName("DataDeEntrada")
                         .HasDefaultValueSql("GETDATE()");
 
-                    b.HasKey("LoteId");
+                    b.HasKey("Id");
 
                     b.HasIndex("CompraId");
 
@@ -220,11 +277,11 @@ namespace EstoqueAPI.Migrations
 
             modelBuilder.Entity("Estoque.DOMAIN.Models.Produto", b =>
                 {
-                    b.Property<int>("IdProduto")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdProduto"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("DescricaoProduto")
                         .IsRequired()
@@ -236,29 +293,41 @@ namespace EstoqueAPI.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<int>("QuantidadeEstoque")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuantidadeVendas")
-                        .HasColumnType("int");
-
                     b.Property<double>("ValorProduto")
                         .HasColumnType("float");
 
-                    b.HasKey("IdProduto");
+                    b.HasKey("Id");
 
                     b.ToTable("Produto", (string)null);
                 });
 
-            modelBuilder.Entity("Estoque.DOMAIN.Models.Venda", b =>
+            modelBuilder.Entity("Estoque.DOMAIN.Models.Revendedor", b =>
                 {
-                    b.Property<int>("VendaId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VendaId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("IdCliente")
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(35)
+                        .HasColumnType("VARCHAR(35)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Revendedor", (string)null);
+                });
+
+            modelBuilder.Entity("Estoque.DOMAIN.Models.Venda", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ClienteId")
                         .HasColumnType("integer");
 
                     b.Property<string>("NumeroPedido")
@@ -268,25 +337,25 @@ namespace EstoqueAPI.Migrations
                     b.Property<int>("TipoVenda")
                         .HasColumnType("int");
 
-                    b.HasKey("VendaId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("IdCliente");
+                    b.HasIndex("ClienteId");
 
                     b.ToTable("Venda", (string)null);
                 });
 
             modelBuilder.Entity("Estoque.DOMAIN.Models.VendaRetornada", b =>
                 {
-                    b.Property<int>("IdVendaRetornada")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdVendaRetornada"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("IdVenda")
+                    b.Property<int>("VendaId")
                         .HasColumnType("int");
 
-                    b.HasKey("IdVendaRetornada");
+                    b.HasKey("Id");
 
                     b.ToTable("VendaRetornada", (string)null);
                 });
@@ -295,7 +364,7 @@ namespace EstoqueAPI.Migrations
                 {
                     b.HasOne("Estoque.DOMAIN.Models.Fornecedor", "Fornecedor")
                         .WithMany("Compras")
-                        .HasForeignKey("IdFornecedor")
+                        .HasForeignKey("FornecedorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_Fornecedor_Compras");
@@ -303,11 +372,42 @@ namespace EstoqueAPI.Migrations
                     b.Navigation("Fornecedor");
                 });
 
+            modelBuilder.Entity("Estoque.DOMAIN.Models.Consignado", b =>
+                {
+                    b.HasOne("Estoque.DOMAIN.Models.Revendedor", "Revendedor")
+                        .WithMany("Consignados")
+                        .HasForeignKey("RevendedorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_Revendedor_Consignados");
+
+                    b.Navigation("Revendedor");
+                });
+
+            modelBuilder.Entity("Estoque.DOMAIN.Models.ItemConsignado", b =>
+                {
+                    b.HasOne("Estoque.DOMAIN.Models.Consignado", null)
+                        .WithMany("ItemConsignados")
+                        .HasForeignKey("ConsignadoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_Consignado_ItemConsignados");
+
+                    b.HasOne("Estoque.DOMAIN.Models.Produto", "Produto")
+                        .WithOne()
+                        .HasForeignKey("Estoque.DOMAIN.Models.ItemConsignado", "ProdutoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_ItemConsignado_Produto");
+
+                    b.Navigation("Produto");
+                });
+
             modelBuilder.Entity("Estoque.DOMAIN.Models.ItemDanificado", b =>
                 {
                     b.HasOne("Estoque.DOMAIN.Models.Produto", "Produto")
                         .WithOne()
-                        .HasForeignKey("Estoque.DOMAIN.Models.ItemDanificado", "IdProduto")
+                        .HasForeignKey("Estoque.DOMAIN.Models.ItemDanificado", "ProdutoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_ItemDanificado_Produto");
@@ -319,17 +419,10 @@ namespace EstoqueAPI.Migrations
                 {
                     b.HasOne("Estoque.DOMAIN.Models.Compra", null)
                         .WithMany("ItemsEstoque")
-                        .HasForeignKey("IdCompra")
+                        .HasForeignKey("CompraId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_Compra_ItemsEstoque");
-
-                    b.HasOne("Estoque.DOMAIN.Models.Produto", "Produto")
-                        .WithOne()
-                        .HasForeignKey("Estoque.DOMAIN.Models.ItemEstoque", "IdProduto")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_ItemEstoque_Produto");
 
                     b.HasOne("Estoque.DOMAIN.Models.Lote", null)
                         .WithMany("ItemsEstoque")
@@ -338,6 +431,13 @@ namespace EstoqueAPI.Migrations
                         .IsRequired()
                         .HasConstraintName("FK_Lote_ItemsEstoque");
 
+                    b.HasOne("Estoque.DOMAIN.Models.Produto", "Produto")
+                        .WithOne()
+                        .HasForeignKey("Estoque.DOMAIN.Models.ItemEstoque", "ProdutoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_ItemEstoque_Produto");
+
                     b.Navigation("Produto");
                 });
 
@@ -345,14 +445,14 @@ namespace EstoqueAPI.Migrations
                 {
                     b.HasOne("Estoque.DOMAIN.Models.Produto", "Produto")
                         .WithOne()
-                        .HasForeignKey("Estoque.DOMAIN.Models.ItemRetornado", "IdProduto")
+                        .HasForeignKey("Estoque.DOMAIN.Models.ItemRetornado", "ProdutoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_ItemRetornado_Produto");
 
                     b.HasOne("Estoque.DOMAIN.Models.VendaRetornada", null)
                         .WithMany("ItemRetornados")
-                        .HasForeignKey("IdVendaRetornada")
+                        .HasForeignKey("VendaRetornadaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_VendaRetornada_ItemRetornados");
@@ -364,14 +464,14 @@ namespace EstoqueAPI.Migrations
                 {
                     b.HasOne("Estoque.DOMAIN.Models.Produto", "Produto")
                         .WithOne()
-                        .HasForeignKey("Estoque.DOMAIN.Models.ItemVenda", "IdProduto")
+                        .HasForeignKey("Estoque.DOMAIN.Models.ItemVenda", "ProdutoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_ItemVenda_Produto");
 
                     b.HasOne("Estoque.DOMAIN.Models.Venda", null)
                         .WithMany("ItemVendas")
-                        .HasForeignKey("IdVenda")
+                        .HasForeignKey("VendaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_Venda_ItemVendas");
@@ -395,7 +495,7 @@ namespace EstoqueAPI.Migrations
                 {
                     b.HasOne("Estoque.DOMAIN.Models.Cliente", "Cliente")
                         .WithMany("Vendas")
-                        .HasForeignKey("IdCliente")
+                        .HasForeignKey("ClienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_Cliente_Vendas");
@@ -415,6 +515,11 @@ namespace EstoqueAPI.Migrations
                     b.Navigation("Lotes");
                 });
 
+            modelBuilder.Entity("Estoque.DOMAIN.Models.Consignado", b =>
+                {
+                    b.Navigation("ItemConsignados");
+                });
+
             modelBuilder.Entity("Estoque.DOMAIN.Models.Fornecedor", b =>
                 {
                     b.Navigation("Compras");
@@ -423,6 +528,11 @@ namespace EstoqueAPI.Migrations
             modelBuilder.Entity("Estoque.DOMAIN.Models.Lote", b =>
                 {
                     b.Navigation("ItemsEstoque");
+                });
+
+            modelBuilder.Entity("Estoque.DOMAIN.Models.Revendedor", b =>
+                {
+                    b.Navigation("Consignados");
                 });
 
             modelBuilder.Entity("Estoque.DOMAIN.Models.Venda", b =>

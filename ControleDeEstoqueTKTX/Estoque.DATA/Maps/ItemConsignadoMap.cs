@@ -9,7 +9,7 @@ namespace Estoque.DATA.Maps
         public void Configure(EntityTypeBuilder<ItemConsignado> builder)
         {
             builder
-               .ToTable(nameof(ItemVenda));
+               .ToTable(nameof(ItemConsignado));
 
             builder
                .HasKey(i => i.Id);
