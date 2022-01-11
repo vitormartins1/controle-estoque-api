@@ -17,11 +17,11 @@ namespace Estoque.DATA.Maps
                 .ValueGeneratedOnAdd();
 
             builder
-                .Property(i => i.IdVenda)
+                .Property(i => i.VendaId)
                 .IsRequired();
 
             builder
-                .Property(i => i.IdProduto)
+                .Property(i => i.ProdutoId)
                 .IsRequired();
 
             builder
@@ -31,7 +31,7 @@ namespace Estoque.DATA.Maps
             builder
                 .HasOne<Produto>(i => i.Produto)
                 .WithOne()
-                .HasForeignKey<ItemVenda>(i => i.IdProduto)
+                .HasForeignKey<ItemVenda>(i => i.ProdutoId)
                 .HasConstraintName("FK_ItemVenda_Produto");
         }
     }

@@ -8,5 +8,6 @@ namespace Estoque.DOMAIN.Models
 {
     public class Estoque
     {
+        public int Id { get; set; }
     }
 }

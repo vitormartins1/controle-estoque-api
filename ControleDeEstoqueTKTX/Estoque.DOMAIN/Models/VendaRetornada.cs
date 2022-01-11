@@ -8,8 +8,8 @@ namespace Estoque.DOMAIN.Models
 {
     public class VendaRetornada
     {
-        public int IdVendaRetornada { get; set; }
-        public int IdVenda { get; set; }
+        public int Id { get; set; }
+        public int VendaId { get; set; }
         public virtual ICollection<ItemRetornado> ItemRetornados { get; set; }
     }
 }

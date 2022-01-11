@@ -11,20 +11,20 @@ namespace Estoque.DATA.Maps
         {
             builder
                 .ToTable(nameof(VendaRetornada))
-                .HasKey(v => v.IdVendaRetornada);
+                .HasKey(v => v.Id);
 
             builder
-                .Property(v => v.IdVendaRetornada)
+                .Property(v => v.Id)
                 .ValueGeneratedOnAdd();
 
             builder
-                .Property(v => v.IdVenda)
+                .Property(v => v.VendaId)
                 .IsRequired();
 
             builder
                 .HasMany<ItemRetornado>(v => v.ItemRetornados)
                 .WithOne()
-                .HasForeignKey(i => i.IdVendaRetornada)
+                .HasForeignKey(i => i.VendaRetornadaId)
                 .HasConstraintName("FK_VendaRetornada_ItemRetornados");
 
         }

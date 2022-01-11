@@ -8,9 +8,9 @@ namespace Estoque.DOMAIN.Models
 {
     public class ItemRetornado
     {
-        public int IdItemRetornado { get; set; }
-        public int IdVendaRetornada { get; set; }
-        public int IdProduto { get; set; }
+        public int Id { get; set; }
+        public int VendaRetornadaId { get; set; }
+        public int ProdutoId { get; set; }
         public int Quantidade { get; set; }
         public Produto Produto { get; set; }
     }

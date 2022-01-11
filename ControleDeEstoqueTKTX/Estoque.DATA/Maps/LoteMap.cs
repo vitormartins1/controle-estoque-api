@@ -10,10 +10,10 @@ namespace Estoque.DATA.Maps
         {
             builder
                 .ToTable(nameof(Lote))
-                .HasKey(l => l.LoteId);
+                .HasKey(l => l.Id);
 
             builder
-                .Property(l => l.LoteId)
+                .Property(l => l.Id)
                 .ValueGeneratedOnAdd();
 
             //builder
@@ -23,7 +23,6 @@ namespace Estoque.DATA.Maps
             builder
                 .Property(l => l.DataDeEntrada)
                 .IsRequired()
-                .HasColumnName("DataDeEntrada")
                 .HasColumnType("SMALLDATETIME")
                 .HasDefaultValueSql("GETDATE()");
 

@@ -10,7 +10,15 @@ namespace Estoque.DATA.Maps
         public void Configure(
             EntityTypeBuilder<Estoque.DOMAIN.Models.Estoque> builder)
         {
-            
+            builder
+                .ToTable(nameof(Estoque.DOMAIN.Models.Estoque));
+
+            builder
+                .HasKey(estoque => estoque.Id);
+
+            builder
+                .Property(estoque => estoque.Id)
+                .ValueGeneratedOnAdd();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Estoque.DOMAIN.Models
 {
     public class Lote
     {
-        public int LoteId { get; set; }
+        public int Id { get; set; }
         public int CompraId { get; set; }
         public Compra Compra { get; set; }
         public virtual ICollection<ItemEstoque> ItemsEstoque { get; set; }

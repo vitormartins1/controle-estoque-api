@@ -10,14 +10,14 @@ namespace Estoque.DATA.Maps
         {
             builder
                 .ToTable(nameof(ItemDanificado))
-                .HasKey(i => i.IdItemDanificado);
+                .HasKey(i => i.Id);
 
             builder
-                .Property(i => i.IdItemDanificado)
+                .Property(i => i.Id)
                 .ValueGeneratedOnAdd();
 
             builder
-                .Property(i => i.IdProduto)
+                .Property(i => i.ProdutoId)
                 .IsRequired();
 
             builder
@@ -27,7 +27,7 @@ namespace Estoque.DATA.Maps
             builder
                 .HasOne<Produto>(i => i.Produto)
                 .WithOne()
-                .HasForeignKey<ItemDanificado>(i => i.IdProduto)
+                .HasForeignKey<ItemDanificado>(i => i.ProdutoId)
                 .HasConstraintName("FK_ItemDanificado_Produto");
         }
     }

@@ -10,10 +10,10 @@ namespace Estoque.DATA.Maps
         {
             builder
                 .ToTable(nameof(Compra))
-                .HasKey(c => c.CompraId);
+                .HasKey(c => c.Id);
 
             builder
-                .Property(c => c.CompraId)
+                .Property(c => c.Id)
                 .ValueGeneratedOnAdd();
 
             builder
@@ -24,14 +24,14 @@ namespace Estoque.DATA.Maps
             builder
                 .HasOne<Fornecedor>(c => c.Fornecedor)
                 .WithMany(f => f.Compras)
-                .HasForeignKey(c => c.IdFornecedor)
+                .HasForeignKey(c => c.FornecedorId)
                 .HasConstraintName("FK_Fornecedor_Compras");
             //.OnDelete(DeleteBehavior)
 
             builder
                 .HasMany<ItemEstoque>(compra => compra.ItemsEstoque)
                 .WithOne()
-                .HasForeignKey(itemEstoque => itemEstoque.IdCompra)
+                .HasForeignKey(itemEstoque => itemEstoque.CompraId)
                 .HasConstraintName("FK_Compra_ItemsEstoque");
 
             builder

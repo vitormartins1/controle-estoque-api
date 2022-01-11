@@ -10,16 +10,16 @@ namespace Estoque.DATA.Maps
         {
             builder
                 .ToTable(nameof(Cliente))
-                .HasKey(c => c.IdCliente);
+                .HasKey(c => c.Id);
 
             builder
-                .Property<int>("IdCliente")
+                .Property(c => c.Id)
                 .ValueGeneratedOnAdd()
                 .HasColumnType("integer")
                 .UseIdentityColumn();
 
             builder
-                .Property<string>("Nome")
+                .Property(c => c.Nome)
                 .HasColumnType("VARCHAR")
                 .HasMaxLength(35)
                 .IsRequired();
