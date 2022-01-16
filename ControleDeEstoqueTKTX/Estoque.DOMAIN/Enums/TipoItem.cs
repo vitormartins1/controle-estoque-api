@@ -1,4 +1,4 @@
-﻿namespace Estoque.DOMAIN.Diagrams
+﻿namespace Estoque.DOMAIN.Enums
 {
     public enum TipoItem
     {
