@@ -43,7 +43,7 @@ Compra tem uma relação de um para muitos com Lote, pois uma compra pode ter va
 
 ## Entity Relationship
 
-<img src="EstoqueEntityRelationshipDiagram.png" title="tktx online">
+<img src="EntityRelationshipDiagram/EstoqueEntityRelationshipDiagramv2.png" title="tktx online">
 
 - Venda
 - ItemVenda
