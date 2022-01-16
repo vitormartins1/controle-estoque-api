@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<modelRoot xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="4.0.0.6" Id="cba47279-0950-4257-bb2c-e4d5e72a52a4" entityContainerName="EFModel1" namespace="Estoque.DOMAIN.Diagrams" automaticMigrationsEnabled="false" showCascadeDeletes="false" databaseType="None" exposeForeignKeys="false" generateDbContextFactory="false" showInterfaceIndicators="false" xmlns="http://schemas.microsoft.com/dsltools/EFModel">
+  <enums>
+    <modelRootHasEnums Id="49de2ba0-c45a-43a0-a8a3-7748bb06995c">
+      <modelEnum Id="4beb2658-7182-43c3-882d-e0f12297830c" namespace="Estoque.DOMAIN.Diagrams" isNamespaceTracking="false" name="TipoItem" outputDirectory="">
+        <values>
+          <modelEnumHasValues Id="4da2ee54-38fe-4231-89ae-f02022f48460">
+            <modelEnumValue Id="93956b18-60df-46f3-a7de-d8043ef9489a" name="ENTRADA" />
+          </modelEnumHasValues>
+          <modelEnumHasValues Id="678096a4-49a4-446b-8016-c8daf3929b32">
+            <modelEnumValue Id="2c77321f-979b-4da6-91fe-62eec0f66f1b" name="SAIDA" />
+          </modelEnumHasValues>
+        </values>
+      </modelEnum>
+    </modelRootHasEnums>
+  </enums>
+  <classes>
+    <modelRootHasClasses Id="c2e0d6fe-7985-4df3-aac5-9977e4d2db51">
+      <modelClass Id="bdb965f3-3f93-48ea-baaf-b50db4da5ba6" databaseSchema="dbo" namespace="Estoque.DOMAIN.Diagrams" isNamespaceTracking="false" name="Item" outputDirectory="" autoPropertyDefault="true" excludeFromMigrations="false" useTemporalTables="false">
+        <unidirectionalTargets>
+          <unidirectionalAssociation Id="398dafa5-f3b7-47a3-973c-3a138cf6bf8d" targetMultiplicity="ZeroOne" targetPropertyName="Produto" collectionClass="HashSet" sourceRole="Principal" targetRole="Dependent" foreignKeyLocation="None" targetImplementNotify="false" targetBackingFieldName="_produto" targetAutoProperty="true" isTargetAbstract="false" targetAutoInclude="false">
+            <modelClassMoniker Id="7b9cba88-4ca1-40c1-959b-d5361bfcc15e" />
+          </unidirectionalAssociation>
+        </unidirectionalTargets>
+        <attributes>
+          <modelAttribute Id="f6cf4601-1fd1-4a3a-8382-fd7385a33738" type="Int32" isIdentity="true" required="true" maxLength="" indexed="false" indexedUnique="false" stringType="None" name="Id" autoProperty="true" minLength="0" columnName="Id" columnType="default" implementNotify="false" isForeignKeyFor="00000000-0000-0000-0000-000000000000" backingFieldName="_id" databaseCollation="default" />
+          <modelAttribute Id="d1cd44fa-0027-4a17-8e1a-8b6c84783ae5" required="true" maxLength="" indexed="false" indexedUnique="false" stringType="None" name="ProdutoId" autoProperty="true" minLength="0" columnName="ProdutoId" columnType="default" implementNotify="false" isForeignKeyFor="00000000-0000-0000-0000-000000000000" backingFieldName="_produtoId" databaseCollation="default" />
+          <modelAttribute Id="09478f47-dff0-42fc-b202-4018a9828484" type="Int32" required="true" maxLength="" indexed="false" indexedUnique="false" stringType="None" name="Quantidade" autoProperty="true" minLength="0" columnName="Quantidade" columnType="default" implementNotify="false" isForeignKeyFor="00000000-0000-0000-0000-000000000000" backingFieldName="_quantidade" databaseCollation="default" />
+          <modelAttribute Id="545db0e2-785b-4194-9ad0-aa032b7ac0eb" type="TipoItem" required="true" maxLength="" indexed="false" indexedUnique="false" stringType="None" name="Tipo" virtual="true" autoProperty="true" minLength="0" columnName="Tipo" columnType="default" implementNotify="false" isForeignKeyFor="00000000-0000-0000-0000-000000000000" backingFieldName="_tipo" databaseCollation="default" />
+        </attributes>
+        <subclasses>
+          <generalization Id="239a3e4b-1682-4530-a76e-9680ac2ee4b1">
+            <modelClassMoniker Id="f64c3ab0-2ff2-4f96-8885-22c305ad55de" />
+          </generalization>
+        </subclasses>
+      </modelClass>
+    </modelRootHasClasses>
+    <modelRootHasClasses Id="805954b4-429c-464b-8841-b81602559208">
+      <modelClass Id="7b9cba88-4ca1-40c1-959b-d5361bfcc15e" databaseSchema="dbo" namespace="Estoque.DOMAIN.Diagrams" name="Produto" outputDirectory="" autoPropertyDefault="true" excludeFromMigrations="false" useTemporalTables="false">
+        <attributes>
+          <modelAttribute Id="9f8e13a1-a853-454e-a11c-7f884566f7f0" type="Int32" isIdentity="true" required="true" maxLength="" indexed="false" indexedUnique="false" stringType="None" name="Id" autoProperty="true" minLength="0" columnName="Id" columnType="default" implementNotify="false" isForeignKeyFor="00000000-0000-0000-0000-000000000000" backingFieldName="_id" databaseCollation="default" />
+          <modelAttribute Id="63a0cbad-1f29-4b19-ba39-7e47c0b47f8a" required="true" maxLength="" indexed="false" indexedUnique="false" stringType="None" name="NomeProduto" autoProperty="true" minLength="0" columnName="NomeProduto" columnType="default" implementNotify="false" isForeignKeyFor="00000000-0000-0000-0000-000000000000" backingFieldName="_nomeProduto" databaseCollation="default" />
+          <modelAttribute Id="c5a70d9c-4611-43ca-ad8c-82fd2e3ad457" type="Double" required="true" maxLength="" indexed="false" indexedUnique="false" stringType="None" name="ValorProduto" autoProperty="true" minLength="0" columnName="ValorProduto" columnType="default" implementNotify="false" isForeignKeyFor="00000000-0000-0000-0000-000000000000" backingFieldName="_valorProduto" databaseCollation="default" />
+          <modelAttribute Id="f1606c5a-7e53-4ef9-99f7-86046abd0688" required="true" maxLength="" indexed="false" indexedUnique="false" stringType="None" name="DescricaoProduto" autoProperty="true" minLength="0" columnName="DescricaoProduto" columnType="default" implementNotify="false" isForeignKeyFor="00000000-0000-0000-0000-000000000000" backingFieldName="_descricaoProduto" databaseCollation="default" />
+        </attributes>
+      </modelClass>
+    </modelRootHasClasses>
+    <modelRootHasClasses Id="f73f0f7c-a029-4831-b7d1-a761354eaad5">
+      <modelClass Id="f64c3ab0-2ff2-4f96-8885-22c305ad55de" databaseSchema="dbo" namespace="Estoque.DOMAIN.Diagrams" isNamespaceTracking="false" name="ItemVendaTeste" outputDirectory="" autoPropertyDefault="true" excludeFromMigrations="false" useTemporalTables="false">
+        <attributes>
+          <modelAttribute Id="3f1878a9-e65f-446c-a24a-a508143de62f" type="Int32" required="true" maxLength="" indexed="false" indexedUnique="false" stringType="None" name="Id" autoProperty="true" minLength="0" columnName="Id" columnType="default" implementNotify="false" isForeignKeyFor="00000000-0000-0000-0000-000000000000" backingFieldName="_id" databaseCollation="default" />
+          <modelAttribute Id="79443532-0ec6-4e55-94c1-a6df1e904dc2" type="Int32" required="true" maxLength="" indexed="false" indexedUnique="false" stringType="None" name="VendaId" autoProperty="true" minLength="0" columnName="VendaId" columnType="default" implementNotify="false" isForeignKeyFor="00000000-0000-0000-0000-000000000000" backingFieldName="_vendaId" databaseCollation="default" />
+        </attributes>
+      </modelClass>
+    </modelRootHasClasses>
+    <modelRootHasClasses Id="51abb249-1160-4f15-9acb-e21e9b5db17b">
+      <modelClass Id="f548e63d-157f-435a-988d-47ae7b8a859f" tableName="VendaTeste" databaseSchema="dbo" namespace="Estoque.DOMAIN.Diagrams" dbSetName="VendaTeste" name="VendaTeste" outputDirectory="" autoPropertyDefault="true" excludeFromMigrations="false" useTemporalTables="false">
+        <attributes>
+          <modelAttribute Id="894b93c4-ec6d-4bc6-8e4e-6f6b3f37ab20" type="Int64" isIdentity="true" required="true" maxLength="" indexed="true" indexedUnique="true" stringType="None" identityType="AutoGenerated" summary="Unique identifier" name="Id" autoProperty="true" minLength="0" columnName="Id" columnType="default" implementNotify="false" isForeignKeyFor="00000000-0000-0000-0000-000000000000" backingFieldName="_id" databaseCollation="default" />
+        </attributes>
+        <bidirectionalTargets>
+          <bidirectionalAssociation Id="390ff57a-daef-46a8-9795-d20cf4defc80" targetPropertyName="ItemVendaTeste" collectionClass="HashSet" sourceRole="Principal" targetRole="Dependent" foreignKeyLocation="None" targetImplementNotify="false" targetBackingFieldName="_itemVendaTeste" targetAutoProperty="true" isTargetAbstract="false" targetAutoInclude="false" sourcePropertyName="VendaTeste" sourceImplementNotify="false" sourceBackingFieldName="_vendaTeste" sourceAutoProperty="true" isSourceAbstract="false" sourceAutoInclude="false">
+            <modelClassMoniker Id="f64c3ab0-2ff2-4f96-8885-22c305ad55de" />
+          </bidirectionalAssociation>
+        </bidirectionalTargets>
+      </modelClass>
+    </modelRootHasClasses>
+  </classes>
+  <diagrams>
+    <modelRootHasModelDiagrams Id="3ec2fae8-7adf-4d91-85dd-af558a1f04df">
+      <modelDiagramData />
+    </modelRootHasModelDiagrams>
+  </diagrams>
+</modelRoot>

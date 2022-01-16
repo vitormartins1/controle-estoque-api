@@ -14,5 +14,6 @@ namespace Estoque.DOMAIN.Models
         public int ProdutoId { get; set; }
         public int Quantidade { get; set; }
         public Produto Produto { get; set; }
+        public DateTime DataDeRegistro { get; set; }
     }
 }

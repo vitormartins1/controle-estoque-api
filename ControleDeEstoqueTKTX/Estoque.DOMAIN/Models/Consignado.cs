@@ -12,5 +12,6 @@ namespace Estoque.DOMAIN.Models
         public int RevendedorId { get; set; }
         public virtual Revendedor Revendedor { get; set; }
         public virtual ICollection<ItemConsignado> ItemConsignados { get; set; }
+        public DateTime DataDeRegistro { get; set; }
     }
 }

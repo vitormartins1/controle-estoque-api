@@ -14,5 +14,6 @@ namespace Estoque.DOMAIN.Models
         public virtual Fornecedor Fornecedor { get; set; }
         public virtual ICollection<ItemEstoque> ItemsEstoque { get; set; }
         public virtual ICollection<Lote> Lotes { get; set; }
+        public DateTime DataDeCompra { get; set; }
     }
 }
