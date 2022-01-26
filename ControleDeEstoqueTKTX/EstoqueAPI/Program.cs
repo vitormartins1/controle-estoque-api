@@ -3,6 +3,7 @@ using Estoque.BUSINESS.Interfaces;
 using Estoque.DATA.Context;
 using Estoque.DATA.Interfaces;
 using Estoque.DATA.Repository;
+using EstoqueAPI.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -12,8 +13,7 @@ builder.Services.AddDbContext<EstoqueContext>(
     options => options.UseSqlServer(
         builder.Configuration.GetConnectionString("EstoqueDBConnection"),
         b => b.MigrationsAssembly("EstoqueAPI")));
-builder.Services.AddScoped<IProdutoBusiness, ProdutoBusiness>();
-builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
+builder.Services.AddEstoqueService();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
