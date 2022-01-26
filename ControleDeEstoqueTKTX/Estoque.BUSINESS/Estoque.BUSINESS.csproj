@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Business\" />
-    <Folder Include="Interfaces\" />
+    <ProjectReference Include="..\Estoque.DATA\Estoque.DATA.csproj" />
+    <ProjectReference Include="..\Estoque.DOMAIN\Estoque.DOMAIN.csproj" />
   </ItemGroup>
 
 </Project>
