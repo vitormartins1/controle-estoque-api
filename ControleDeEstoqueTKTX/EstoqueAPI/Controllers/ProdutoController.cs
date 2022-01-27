@@ -55,7 +55,7 @@ namespace EstoqueAPI.Controllers
         {
             try
             {
-                var produtoAtualizado = await produtoBusiness.PutProduto(produto);
+                var produtoAtualizado = await produtoBusiness.PutProduto(id, produto);
                 return Ok(produtoAtualizado);
             }
             catch (Exception)

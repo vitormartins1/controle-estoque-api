@@ -18,16 +18,31 @@ namespace Estoque.BUSINESS.Business
             _produtoRepository = produtoRepository;
         }
 
+        public Task<Produto> DeleteProduto(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Produto> GetProduto(int id)
         {
             var produtoConsultado = await _produtoRepository.GetProdutoAsync(id);
             return produtoConsultado;
         }
 
-        public Task<IEnumerable<Produto>> GetProdutos()
+        public async Task<IEnumerable<Produto>> GetProdutos()
         {
-            var produtos = _produtoRepository.GetProdutosAsync();
+            var produtos = await _produtoRepository.GetProdutosAsync();
             return produtos;
+        }
+
+        public Task<Produto> PostProduto(Produto produto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Produto> PutProduto(int id, Produto produto)
+        {
+            throw new NotImplementedException();
         }
     }
 }

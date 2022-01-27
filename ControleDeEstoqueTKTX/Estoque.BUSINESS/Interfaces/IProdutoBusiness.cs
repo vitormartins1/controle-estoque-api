@@ -11,5 +11,8 @@ namespace Estoque.BUSINESS.Interfaces
     {
         Task<IEnumerable<Produto>> GetProdutos();
         Task<Produto> GetProduto(int id);
+        Task<Produto> PostProduto(Produto produto);
+        Task<Produto> PutProduto(int id, Produto produto);
+        Task<Produto> DeleteProduto(int id);
     }
 }
