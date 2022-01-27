@@ -36,20 +36,44 @@ namespace EstoqueAPI.Controllers
 
         // POST api/<ProdutoController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] Produto produto, [FromServices] IProdutoBusiness produtoBusiness)
         {
+            try
+            {
+                var produtoSalvo = await produtoBusiness.PostProduto(produto);
+                return Ok(produtoSalvo);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
         // PUT api/<ProdutoController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(int id, Produto produto, [FromServices] IProdutoBusiness produtoBusiness)
         {
+            try
+            {
+                var produtoAtualizado = await produtoBusiness.PutProduto(produto);
+                return Ok(produtoAtualizado);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
         // DELETE api/<ProdutoController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id, [FromServices] IProdutoBusiness produtoBusiness)
         {
+            var produtoExcluido = await produtoBusiness.DeleteProduto(id);
+            if (produtoExcluido == null)
+            {
+                return NotFound();
+            }
+            return NoContent();
         }
     }
 }
