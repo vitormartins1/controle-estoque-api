@@ -30,8 +30,8 @@ namespace Estoque.DATA.Maps
 
             builder
                 .HasOne<Produto>()
-                .WithOne()
-                .HasForeignKey<ItemVenda>(i => i.ProdutoId)
+                .WithMany()
+                .HasForeignKey(i => i.ProdutoId)
                 .HasConstraintName("FK_ItemVenda_Produto");
         }
     }

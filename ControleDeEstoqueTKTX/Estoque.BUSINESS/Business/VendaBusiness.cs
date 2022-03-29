@@ -1,4 +1,5 @@
 ﻿using Estoque.BUSINESS.Interfaces;
+using Estoque.DATA.DTO.Venda;
 using Estoque.DATA.Interfaces;
 using Estoque.DOMAIN.Models;
 using FluentResults;
@@ -37,13 +38,13 @@ namespace Estoque.BUSINESS.Business
             return vendas;
         }
 
-        public Venda PostVenda(Venda venda)
+        public Venda PostVenda(CreateVendaDTO venda)
         {
             Venda vendaConsultada = vendaRepository.PostVenda(venda);
             return vendaConsultada;
         }
 
-        public Result PutVenda(int id, Venda venda)
+        public Result PutVenda(int id, UpdateVendaDTO venda)
         {
             Result result = vendaRepository.PutVenda(id, venda);
             return result;

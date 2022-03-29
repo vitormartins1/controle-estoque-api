@@ -1,4 +1,6 @@
-﻿using Estoque.DOMAIN.Models;
+﻿using Estoque.DATA.DTO.Produto;
+using Estoque.DOMAIN.Models;
+using FluentResults;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,9 @@ namespace Estoque.DATA.Interfaces
 {
     public interface IProdutoRepository
     {
-        Task<IEnumerable<Produto>> GetProdutosAsync();
-        Task<Produto> GetProdutoAsync(int id);
+        IEnumerable<ReadProdutoDTO> GetProdutos();
+        ReadProdutoDTO GetProdutoPorId(int id);
+        ReadProdutoDTO PostProduto(CreateProdutoDTO produtoDTO);
+        Result PutProduto(int id, UpdateProdutoDTO produto);
     }
 }

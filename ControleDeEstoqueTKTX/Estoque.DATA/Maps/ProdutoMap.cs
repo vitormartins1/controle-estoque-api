@@ -35,6 +35,8 @@ namespace Estoque.DATA.Maps
                 .HasColumnType("VARCHAR")
                 .HasMaxLength(450);
 
+            //builder.HasOne<ItemVenda>().WithOne().HasForeignKey<ItemVenda>(i => i.ProdutoId);
+
         }
     }
 }

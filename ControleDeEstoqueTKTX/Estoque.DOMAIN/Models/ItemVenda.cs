@@ -1,4 +1,6 @@
-﻿namespace Estoque.DOMAIN.Models
+﻿using System.Text.Json.Serialization;
+
+namespace Estoque.DOMAIN.Models
 {
     public class ItemVenda
     {

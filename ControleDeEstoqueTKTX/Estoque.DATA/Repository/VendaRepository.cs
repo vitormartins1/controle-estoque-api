@@ -1,4 +1,6 @@
-﻿using Estoque.DATA.Context;
+﻿using AutoMapper;
+using Estoque.DATA.Context;
+using Estoque.DATA.DTO.Venda;
 using Estoque.DATA.Interfaces;
 using Estoque.DOMAIN.Models;
 using FluentResults;
@@ -13,10 +15,12 @@ namespace Estoque.DATA.Repository
     public class VendaRepository : IVendaRepository
     {
         private EstoqueDbContext context;
+        private IMapper mapper;
 
-        public VendaRepository(EstoqueDbContext context)
+        public VendaRepository(EstoqueDbContext context, IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
 
         public IEnumerable<Venda> GetVendas()
@@ -42,24 +46,24 @@ namespace Estoque.DATA.Repository
             return venda;
         }
 
-        public Venda PostVenda(Venda venda)
+        public Venda PostVenda(CreateVendaDTO vendaDTO)
         {
+            Venda venda = mapper.Map<Venda>(vendaDTO);
+
             context.Venda.Add(venda);
             context.SaveChanges();
 
-            Venda vendaConsultada = context.Venda.First(v => v.Id == venda.Id);
-
-            return vendaConsultada;
+            return venda;
         }
 
-        public Result PutVenda(int id, Venda venda)
+        public Result PutVenda(int id, UpdateVendaDTO venda)
         {
-            context.Venda.Update(venda);
-
-            Venda vendaAtualizada = context.Venda.First(venda => venda.Id == id);
+            Venda vendaAtualizada = context.Venda.First(v => v.Id == id);
             if (vendaAtualizada == null)
                 return Result.Fail("Venda não encontrada.");
 
+            //context.Venda.Update(venda);
+            mapper.Map(venda, vendaAtualizada);
             context.SaveChanges();
 
             return Result.Ok();

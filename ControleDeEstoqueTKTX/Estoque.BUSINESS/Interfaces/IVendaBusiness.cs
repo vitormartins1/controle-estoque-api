@@ -1,4 +1,5 @@
-﻿using Estoque.DOMAIN.Models;
+﻿using Estoque.DATA.DTO.Venda;
+using Estoque.DOMAIN.Models;
 using FluentResults;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,8 @@ namespace Estoque.BUSINESS.Interfaces
     {
         public IEnumerable<Venda> GetVendas();
         Venda GetVendaPorId(int id);
-        Venda PostVenda(Venda venda);
-        Result PutVenda(int id, Venda venda);
+        Venda PostVenda(CreateVendaDTO venda);
+        Result PutVenda(int id, UpdateVendaDTO venda);
         Result DeleteVenda(int id);
     }
 }

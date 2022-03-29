@@ -1,6 +1,9 @@
-﻿using Estoque.DATA.Context;
+﻿using AutoMapper;
+using Estoque.DATA.Context;
+using Estoque.DATA.DTO.Produto;
 using Estoque.DATA.Interfaces;
 using Estoque.DOMAIN.Models;
+using FluentResults;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,29 +15,53 @@ namespace Estoque.DATA.Repository
     public class ProdutoRepository : IProdutoRepository
     {
         private EstoqueDbContext context;
+        private IMapper mapper;
 
-        public ProdutoRepository(EstoqueDbContext context)
+        public ProdutoRepository(EstoqueDbContext context, IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
 
-        public async Task<Produto> GetProdutoAsync(int id)
+        public ReadProdutoDTO GetProdutoPorId(int id)
         {
-            var produtoConsultado = context.Produto
-                .Where(p => p.Id == id)
-                .FirstOrDefault();
+            Produto produtoConsultado = context.Produto
+                .First(p => p.Id == id);
 
             if (produtoConsultado == null) return null;
-            await context.SaveChangesAsync();
-            return produtoConsultado;
+
+            return mapper.Map<ReadProdutoDTO>(produtoConsultado);
         }
 
-        public async Task<IEnumerable<Produto>> GetProdutosAsync()
+        public IEnumerable<ReadProdutoDTO> GetProdutos()
         {
-            var produtosConsultados = context.Produto.ToList().AsEnumerable();
+            IEnumerable<Produto> produtosConsultados = context.Produto.ToList().AsEnumerable();
             if (produtosConsultados == null) return null;
-            await context.SaveChangesAsync();
-            return produtosConsultados.AsEnumerable();
+
+            return mapper.Map<IEnumerable<ReadProdutoDTO>>(produtosConsultados);
+        }
+
+        public ReadProdutoDTO PostProduto(CreateProdutoDTO produtoDTO)
+        {
+            Produto produto = mapper.Map<Produto>(produtoDTO);
+
+            context.Produto.Add(produto);
+            context.SaveChanges();
+
+            return mapper.Map<ReadProdutoDTO>(produto);
+        }
+
+        public Result PutProduto(int id, UpdateProdutoDTO produtoDTO)
+        {
+            Produto produto = context.Produto.First(p => p.Id == id);
+
+            if (produto == null) 
+                return Result.Fail("Produto não encontrado.");
+
+            mapper.Map(produtoDTO, produto);
+            context.SaveChanges();
+
+            return Result.Ok();
         }
     }
 }

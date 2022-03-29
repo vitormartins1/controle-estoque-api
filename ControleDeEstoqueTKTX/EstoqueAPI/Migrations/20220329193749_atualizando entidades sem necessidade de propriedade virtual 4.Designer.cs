@@ -4,6 +4,7 @@ using Estoque.DATA.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EstoqueAPI.Migrations
 {
     [DbContext(typeof(EstoqueDbContext))]
-    partial class EstoqueContextModelSnapshot : ModelSnapshot
+    [Migration("20220329193749_atualizando entidades sem necessidade de propriedade virtual 4")]
+    partial class atualizandoentidadessemnecessidadedepropriedadevirtual4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -293,7 +295,8 @@ namespace EstoqueAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProdutoId");
+                    b.HasIndex("ProdutoId")
+                        .IsUnique();
 
                     b.HasIndex("VendaId");
 
@@ -564,8 +567,8 @@ namespace EstoqueAPI.Migrations
             modelBuilder.Entity("Estoque.DOMAIN.Models.ItemVenda", b =>
                 {
                     b.HasOne("Estoque.DOMAIN.Models.Produto", null)
-                        .WithMany()
-                        .HasForeignKey("ProdutoId")
+                        .WithOne()
+                        .HasForeignKey("Estoque.DOMAIN.Models.ItemVenda", "ProdutoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_ItemVenda_Produto");

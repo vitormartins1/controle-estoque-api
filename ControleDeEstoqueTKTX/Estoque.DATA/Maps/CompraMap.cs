@@ -22,7 +22,7 @@ namespace Estoque.DATA.Maps
                 .HasMaxLength(43);
 
             builder
-                .HasOne<Fornecedor>(c => c.Fornecedor)
+                .HasOne<Fornecedor>()
                 .WithMany(f => f.Compras)
                 .HasForeignKey(c => c.FornecedorId)
                 .HasConstraintName("FK_Fornecedor_Compras");
@@ -36,7 +36,7 @@ namespace Estoque.DATA.Maps
 
             builder
                 .HasMany<Lote>(compra => compra.Lotes)
-                .WithOne(lote => lote.Compra)
+                .WithOne()
                 .HasForeignKey(lote => lote.CompraId)
                 .HasConstraintName("FK_Compra_Lotes");
         }

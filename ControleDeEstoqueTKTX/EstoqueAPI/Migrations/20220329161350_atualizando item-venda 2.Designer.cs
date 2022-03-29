@@ -4,6 +4,7 @@ using Estoque.DATA.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EstoqueAPI.Migrations
 {
     [DbContext(typeof(EstoqueDbContext))]
-    partial class EstoqueContextModelSnapshot : ModelSnapshot
+    [Migration("20220329161350_atualizando item-venda 2")]
+    partial class atualizandoitemvenda2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -293,7 +295,8 @@ namespace EstoqueAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProdutoId");
+                    b.HasIndex("ProdutoId")
+                        .IsUnique();
 
                     b.HasIndex("VendaId");
 
@@ -467,22 +470,26 @@ namespace EstoqueAPI.Migrations
 
             modelBuilder.Entity("Estoque.DOMAIN.Models.Compra", b =>
                 {
-                    b.HasOne("Estoque.DOMAIN.Models.Fornecedor", null)
+                    b.HasOne("Estoque.DOMAIN.Models.Fornecedor", "Fornecedor")
                         .WithMany("Compras")
                         .HasForeignKey("FornecedorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_Fornecedor_Compras");
+
+                    b.Navigation("Fornecedor");
                 });
 
             modelBuilder.Entity("Estoque.DOMAIN.Models.Consignado", b =>
                 {
-                    b.HasOne("Estoque.DOMAIN.Models.Revendedor", null)
+                    b.HasOne("Estoque.DOMAIN.Models.Revendedor", "Revendedor")
                         .WithMany("Consignados")
                         .HasForeignKey("RevendedorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_Revendedor_Consignados");
+
+                    b.Navigation("Revendedor");
                 });
 
             modelBuilder.Entity("Estoque.DOMAIN.Models.ItemConsignado", b =>
@@ -564,8 +571,8 @@ namespace EstoqueAPI.Migrations
             modelBuilder.Entity("Estoque.DOMAIN.Models.ItemVenda", b =>
                 {
                     b.HasOne("Estoque.DOMAIN.Models.Produto", null)
-                        .WithMany()
-                        .HasForeignKey("ProdutoId")
+                        .WithOne()
+                        .HasForeignKey("Estoque.DOMAIN.Models.ItemVenda", "ProdutoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_ItemVenda_Produto");

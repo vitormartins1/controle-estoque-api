@@ -1,6 +1,8 @@
 ﻿using Estoque.BUSINESS.Interfaces;
+using Estoque.DATA.DTO.Produto;
 using Estoque.DATA.Interfaces;
 using Estoque.DOMAIN.Models;
+using FluentResults;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,31 +20,33 @@ namespace Estoque.BUSINESS.Business
             this.produtoRepository = produtoRepository;
         }
 
-        public Task<Produto> DeleteProduto(int id)
+        public Result DeleteProduto(int id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<Produto> GetProduto(int id)
+        public ReadProdutoDTO GetProduto(int id)
         {
-            var produtoConsultado = await produtoRepository.GetProdutoAsync(id);
+            ReadProdutoDTO produtoConsultado = produtoRepository.GetProdutoPorId(id);
             return produtoConsultado;
         }
 
-        public async Task<IEnumerable<Produto>> GetProdutos()
+        public IEnumerable<ReadProdutoDTO> GetProdutos()
         {
-            var produtos = await produtoRepository.GetProdutosAsync();
+            IEnumerable<ReadProdutoDTO> produtos = produtoRepository.GetProdutos();
             return produtos;
         }
 
-        public Task<Produto> PostProduto(Produto produto)
+        public ReadProdutoDTO PostProduto(CreateProdutoDTO produto)
         {
-            throw new NotImplementedException();
+            ReadProdutoDTO produtoDTO = produtoRepository.PostProduto(produto);
+            return produtoDTO;
         }
 
-        public Task<Produto> PutProduto(int id, Produto produto)
+        public Result PutProduto(int id, UpdateProdutoDTO produto)
         {
-            throw new NotImplementedException();
+            Result result = produtoRepository.PutProduto(id, produto);
+            return result;
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Estoque.DATA.Maps
                 .ValueGeneratedOnAdd();
 
             builder
-                .HasOne<Revendedor>(c => c.Revendedor)
+                .HasOne<Revendedor>()
                 .WithMany(r => r.Consignados)
                 .HasForeignKey(c => c.RevendedorId)
                 .HasConstraintName("FK_Revendedor_Consignados");

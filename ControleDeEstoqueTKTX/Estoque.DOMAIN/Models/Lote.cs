@@ -10,7 +10,6 @@ namespace Estoque.DOMAIN.Models
     {
         public int Id { get; set; }
         public int CompraId { get; set; }
-        public Compra Compra { get; set; }
         public virtual ICollection<ItemEstoque> ItemsEstoque { get; set; }
         public DateTime DataDeEntrada { get; set; }
         public DateTime DataDeBaixa { get; set; }

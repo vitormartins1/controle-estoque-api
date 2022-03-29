@@ -1,4 +1,5 @@
 ﻿using Estoque.BUSINESS.Interfaces;
+using Estoque.DATA.DTO.Venda;
 using Estoque.DOMAIN.Models;
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;
@@ -38,7 +39,7 @@ namespace EstoqueAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Venda venda)
+        public IActionResult Post([FromBody] CreateVendaDTO venda)
         {
             Venda vendaSalva = vendaBusiness.PostVenda(venda);
             if (vendaSalva == null)
@@ -47,7 +48,7 @@ namespace EstoqueAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Venda venda)
+        public IActionResult Put(int id, [FromBody] UpdateVendaDTO venda)
         {
             Result result = vendaBusiness.PutVenda(id, venda);
 

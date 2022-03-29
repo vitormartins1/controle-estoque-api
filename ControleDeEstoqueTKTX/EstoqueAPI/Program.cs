@@ -10,7 +10,7 @@ using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<EstoqueDbContext>(
-    options => options.UseSqlServer(
+    options => options.UseLazyLoadingProxies().UseSqlServer(
         builder.Configuration.GetConnectionString("EstoqueDBConnection"),
         b => b.MigrationsAssembly("EstoqueAPI")));
 builder.Services.AddEstoqueService();
@@ -20,6 +20,7 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Estoque API", Version = "v1" });
 });
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 

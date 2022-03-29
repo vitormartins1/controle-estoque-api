@@ -1,11 +1,24 @@
 # Sistema de Gerenciamento de Estoque, Fornecedores e Revendedores
-<img src="download.webp" title="tktx online">
 
-- <a href="https://tktxonline.com.br/">TKTX Online</a> 
+## Dependências
 
-- <a href="https://galeriadapele.com.br/">Galeria da Pele</a> 
+Framework .NET 6.0
 
-- <a href="https://tabacariadaquebrada.com.br/">Tabacaria da Quebrada</a> 
+AutoMapper.Extensions.Microsoft.DependencyInjection 11.0.0
+
+FluentResults 3.3.0
+
+Microsoft.EntityFrameworkCore 6.0.3
+
+Microsoft.EntityFrameworkCore.Proxies 6.0.3
+
+Microsoft.EntityFrameworkCore.SqlServer 6.0.3
+
+Microsoft.EntityFrameworkCore.Tools 6.0.3
+
+Microsoft.VisualStudio.Web.CodeGeneration.Design 6.0.2
+
+Swashbuckle.AspNetCore 6.3.0
 
 ## Estoque e Lote
 
@@ -28,13 +41,13 @@ Organizar em lotes ajuda a ter um controle da duração dos produtos e controle 
 - Vendas => Para Revendedores
 - Consignado => Para Revendedores (Status: Pendente, Pago, Quantidade Pendente e Quantidade Paga em quantidade de produtos.
 - Danificados => Produtos danificados no estoque ou durante o transporte ou que passaram da validade
- 
+
 ## Compras
 
 Compras servem para ter uma estimativa de tempo desde o pedido de compra com o fornecedor e a chegada a loja. Uma compra também estará associada a diversos lotes, para ter o dado de divergência dos produtos perdidos ou danificados durante o transporte.
 
 Compra tem uma relação de um para muitos com Lote, pois uma compra pode ter varios lotes e um lote só pode ter uma compra.
- 
+
 ## Usuarios
 
 - Administrador (Acesso de criação de compras, aprovamento de baixa de lotes, criação de avisos de nivel estoque)

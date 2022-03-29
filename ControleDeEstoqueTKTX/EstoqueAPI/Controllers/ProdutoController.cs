@@ -1,5 +1,7 @@
 ﻿using Estoque.BUSINESS.Interfaces;
+using Estoque.DATA.DTO.Produto;
 using Estoque.DOMAIN.Models;
+using FluentResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EstoqueAPI.Controllers
@@ -8,13 +10,20 @@ namespace EstoqueAPI.Controllers
     [Route("api/[controller]")]
     public class ProdutoController : ControllerBase
     {
+        private IProdutoBusiness produtoBusiness;
+
+        public ProdutoController(IProdutoBusiness produtoBusiness)
+        {
+            this.produtoBusiness = produtoBusiness;
+        }
+
         // GET: api/<ProdutoController>
         [HttpGet]
-        public async Task<IActionResult> Get([FromServices] IProdutoBusiness produtoBusiness)
+        public IActionResult Get()
         {
             try
             {
-                var produtos = await produtoBusiness.GetProdutos();
+                IEnumerable<ReadProdutoDTO> produtos = produtoBusiness.GetProdutos();
                 return Ok(produtos);
             }
             catch (System.Exception)
@@ -25,20 +34,19 @@ namespace EstoqueAPI.Controllers
 
         // GET api/<ProdutoController>/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id,
-            [FromServices] IProdutoBusiness produtoBusiness)
+        public IActionResult Get(int id)
         {
-            var produto = await produtoBusiness.GetProduto(id);
-            return Ok(produto);
+            ReadProdutoDTO produtoDTO = produtoBusiness.GetProduto(id);
+            return Ok(produtoDTO);
         }
 
         // POST api/<ProdutoController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Produto produto, [FromServices] IProdutoBusiness produtoBusiness)
+        public IActionResult Post([FromBody] CreateProdutoDTO produtoDTO)
         {
             try
             {
-                var produtoSalvo = await produtoBusiness.PostProduto(produto);
+                ReadProdutoDTO produtoSalvo = produtoBusiness.PostProduto(produtoDTO);
                 return Ok(produtoSalvo);
             }
             catch (Exception)
@@ -49,25 +57,22 @@ namespace EstoqueAPI.Controllers
 
         // PUT api/<ProdutoController>/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, Produto produto, [FromServices] IProdutoBusiness produtoBusiness)
+        public IActionResult Put(int id, UpdateProdutoDTO produto)
         {
-            try
-            {
-                var produtoAtualizado = await produtoBusiness.PutProduto(id, produto);
-                return Ok(produtoAtualizado);
-            }
-            catch (Exception)
-            {
+            Result result = produtoBusiness.PutProduto(id, produto);
+
+            if (result.IsFailed)
                 return BadRequest();
-            }
+
+            return Ok();
         }
 
         // DELETE api/<ProdutoController>/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id, [FromServices] IProdutoBusiness produtoBusiness)
+        public IActionResult Delete(int id)
         {
-            var produtoExcluido = await produtoBusiness.DeleteProduto(id);
-            if (produtoExcluido == null)
+            Result result = produtoBusiness.DeleteProduto(id);
+            if (result.IsFailed)
             {
                 return NotFound();
             }
