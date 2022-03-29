@@ -11,11 +11,11 @@ namespace Estoque.BUSINESS.Business
 {
     public class ProdutoBusiness : IProdutoBusiness
     {
-        private readonly IProdutoRepository _produtoRepository;
+        private readonly IProdutoRepository produtoRepository;
 
         public ProdutoBusiness(IProdutoRepository produtoRepository)
         {
-            _produtoRepository = produtoRepository;
+            this.produtoRepository = produtoRepository;
         }
 
         public Task<Produto> DeleteProduto(int id)
@@ -25,13 +25,13 @@ namespace Estoque.BUSINESS.Business
 
         public async Task<Produto> GetProduto(int id)
         {
-            var produtoConsultado = await _produtoRepository.GetProdutoAsync(id);
+            var produtoConsultado = await produtoRepository.GetProdutoAsync(id);
             return produtoConsultado;
         }
 
         public async Task<IEnumerable<Produto>> GetProdutos()
         {
-            var produtos = await _produtoRepository.GetProdutosAsync();
+            var produtos = await produtoRepository.GetProdutosAsync();
             return produtos;
         }
 

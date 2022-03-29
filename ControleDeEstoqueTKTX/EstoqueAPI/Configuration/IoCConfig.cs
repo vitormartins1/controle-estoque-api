@@ -30,6 +30,7 @@ namespace EstoqueAPI.Configuration
         private static IServiceCollection AddRepositoryService(this IServiceCollection service)
         {
             service.AddScoped<IProdutoRepository, ProdutoRepository>();
+            service.AddScoped<IVendaRepository, VendaRepository>();
 
             return service;
         }
@@ -37,6 +38,7 @@ namespace EstoqueAPI.Configuration
         private static IServiceCollection AddBusinessService(this IServiceCollection service)
         {
             service.AddScoped<IProdutoBusiness, ProdutoBusiness>();
+            service.AddScoped<IVendaBusiness, VendaBusiness>();
 
             return service;
         }

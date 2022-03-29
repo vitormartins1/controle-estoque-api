@@ -11,26 +11,29 @@ namespace Estoque.DATA.Repository
 {
     public class ProdutoRepository : IProdutoRepository
     {
-        private readonly EstoqueContext _context;
+        private EstoqueDbContext context;
 
-        public ProdutoRepository(EstoqueContext context)
+        public ProdutoRepository(EstoqueDbContext context)
         {
-            _context = context;
+            this.context = context;
         }
 
         public async Task<Produto> GetProdutoAsync(int id)
         {
-            var produtoConsultado = _context.Produto.Where(p => p.Id == id).FirstOrDefault();
+            var produtoConsultado = context.Produto
+                .Where(p => p.Id == id)
+                .FirstOrDefault();
+
             if (produtoConsultado == null) return null;
-            await _context.SaveChangesAsync();
+            await context.SaveChangesAsync();
             return produtoConsultado;
         }
 
         public async Task<IEnumerable<Produto>> GetProdutosAsync()
         {
-            var produtosConsultados = _context.Produto.ToList().AsEnumerable();
+            var produtosConsultados = context.Produto.ToList().AsEnumerable();
             if (produtosConsultados == null) return null;
-            await _context.SaveChangesAsync();
+            await context.SaveChangesAsync();
             return produtosConsultados.AsEnumerable();
         }
     }

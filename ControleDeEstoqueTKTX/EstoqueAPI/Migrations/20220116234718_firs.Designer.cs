@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EstoqueAPI.Migrations
 {
-    [DbContext(typeof(EstoqueContext))]
+    [DbContext(typeof(EstoqueDbContext))]
     [Migration("20220116234718_firs")]
     partial class firs
     {

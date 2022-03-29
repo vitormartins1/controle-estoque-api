@@ -25,7 +25,7 @@ namespace Estoque.DATA.Maps
             //    .Ignore(v => v.Cliente);
 
             builder
-                .HasOne<Cliente>(v => v.Cliente)
+                .HasOne<Cliente>()
                 .WithMany(c => c.Vendas)
                 .HasForeignKey(v => v.ClienteId)
                 .HasConstraintName("FK_Cliente_Vendas");
@@ -35,7 +35,8 @@ namespace Estoque.DATA.Maps
                 .HasMany<ItemVenda>(venda => venda.ItemVendas)
                 .WithOne()
                 .HasForeignKey(itemVenda => itemVenda.VendaId)
-                .HasConstraintName("FK_Venda_ItemVendas");
+                .HasConstraintName("FK_Venda_ItemVendas")
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

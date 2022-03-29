@@ -9,7 +9,7 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<EstoqueContext>(
+builder.Services.AddDbContext<EstoqueDbContext>(
     options => options.UseSqlServer(
         builder.Configuration.GetConnectionString("EstoqueDBConnection"),
         b => b.MigrationsAssembly("EstoqueAPI")));

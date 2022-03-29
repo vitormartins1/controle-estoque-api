@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Estoque.DATA.Context
 {
-    public class EstoqueContext : DbContext
+    public class EstoqueDbContext : DbContext
     {
-        public EstoqueContext(
-            DbContextOptions<EstoqueContext> options
+        public EstoqueDbContext(
+            DbContextOptions<EstoqueDbContext> options
             ) : base(options) { }
 
         public DbSet<Cliente> Cliente { get; set; }

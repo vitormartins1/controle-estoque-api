@@ -9,7 +9,6 @@ namespace Estoque.DOMAIN.Models
         public string? NumeroPedido { get; set; }
         public int ClienteId { get; set; }
         public TipoVenda TipoVenda { get; set; }
-        [JsonIgnore] public virtual Cliente Cliente { get; set; }
         public virtual ICollection<ItemVenda> ItemVendas { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using Estoque.DATA.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EstoqueAPI.Migrations
 {
     [DbContext(typeof(EstoqueDbContext))]
-    partial class EstoqueContextModelSnapshot : ModelSnapshot
+    [Migration("20220329035120_atualizando entiddades")]
+    partial class atualizandoentiddades
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -568,7 +570,7 @@ namespace EstoqueAPI.Migrations
 
             modelBuilder.Entity("Estoque.DOMAIN.Models.ItemVenda", b =>
                 {
-                    b.HasOne("Estoque.DOMAIN.Models.Produto", null)
+                    b.HasOne("Estoque.DOMAIN.Models.Produto", "Produto")
                         .WithOne()
                         .HasForeignKey("Estoque.DOMAIN.Models.ItemVenda", "ProdutoId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -581,6 +583,8 @@ namespace EstoqueAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_Venda_ItemVendas");
+
+                    b.Navigation("Produto");
                 });
 
             modelBuilder.Entity("Estoque.DOMAIN.Models.Lote", b =>

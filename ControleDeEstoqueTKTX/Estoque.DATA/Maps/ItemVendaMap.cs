@@ -29,7 +29,7 @@ namespace Estoque.DATA.Maps
                 .IsRequired();
 
             builder
-                .HasOne<Produto>(i => i.Produto)
+                .HasOne<Produto>()
                 .WithOne()
                 .HasForeignKey<ItemVenda>(i => i.ProdutoId)
                 .HasConstraintName("FK_ItemVenda_Produto");
