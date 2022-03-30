@@ -15,5 +15,6 @@ namespace Estoque.DATA.Interfaces
         ReadProdutoDTO GetProdutoPorId(int id);
         ReadProdutoDTO PostProduto(CreateProdutoDTO produtoDTO);
         Result PutProduto(int id, UpdateProdutoDTO produto);
+        Result DeleteProduto(int id);
     }
 }

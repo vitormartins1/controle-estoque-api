@@ -20,11 +20,6 @@ namespace Estoque.BUSINESS.Business
             this.produtoRepository = produtoRepository;
         }
 
-        public Result DeleteProduto(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public ReadProdutoDTO GetProduto(int id)
         {
             ReadProdutoDTO produtoConsultado = produtoRepository.GetProdutoPorId(id);
@@ -46,6 +41,12 @@ namespace Estoque.BUSINESS.Business
         public Result PutProduto(int id, UpdateProdutoDTO produto)
         {
             Result result = produtoRepository.PutProduto(id, produto);
+            return result;
+        }
+
+        public Result DeleteProduto(int id)
+        {
+            Result result = produtoRepository.DeleteProduto(id);
             return result;
         }
     }

@@ -4,7 +4,16 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="wwwroot\swagger-ui\theme-newspaper.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="wwwroot\swagger-ui\theme-newspaper.css" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
@@ -21,6 +30,15 @@
   <ItemGroup>
     <ProjectReference Include="..\Estoque.BUSINESS\Estoque.BUSINESS.csproj" />
     <ProjectReference Include="..\Estoque.DATA\Estoque.DATA.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\swagger-ui\theme-feeling-blue.css" />
+    <None Include="wwwroot\swagger-ui\theme-flattop.css" />
+    <None Include="wwwroot\swagger-ui\theme-material.css" />
+    <None Include="wwwroot\swagger-ui\theme-monokai.css" />
+    <None Include="wwwroot\swagger-ui\theme-muted.css" />
+    <None Include="wwwroot\swagger-ui\theme-outline.css" />
   </ItemGroup>
 
 </Project>

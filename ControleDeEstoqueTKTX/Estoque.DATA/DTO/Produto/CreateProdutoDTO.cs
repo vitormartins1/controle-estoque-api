@@ -8,5 +8,8 @@ namespace Estoque.DATA.DTO.Produto
 {
     public class CreateProdutoDTO
     {
+        public string NomeProduto { get; set; }
+        public double ValorProduto { get; set; }
+        public string DescricaoProduto { get; set; }
     }
 }

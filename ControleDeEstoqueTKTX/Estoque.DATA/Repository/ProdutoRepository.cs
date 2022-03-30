@@ -23,10 +23,23 @@ namespace Estoque.DATA.Repository
             this.mapper = mapper;
         }
 
+        public Result DeleteProduto(int id)
+        {
+            Produto produto = context.Produto.FirstOrDefault(p => p.Id == id);
+
+            if (produto == null)
+                return Result.Fail("Produto não encontrado.");
+
+            context.Remove(produto);
+            context.SaveChanges();
+
+            return Result.Ok();
+        }
+
         public ReadProdutoDTO GetProdutoPorId(int id)
         {
             Produto produtoConsultado = context.Produto
-                .First(p => p.Id == id);
+                .FirstOrDefault(p => p.Id == id);
 
             if (produtoConsultado == null) return null;
 
