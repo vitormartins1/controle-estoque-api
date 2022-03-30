@@ -2,23 +2,15 @@
 
 ## Dependências
 
-Framework .NET 6.0
-
-AutoMapper.Extensions.Microsoft.DependencyInjection 11.0.0
-
-FluentResults 3.3.0
-
-Microsoft.EntityFrameworkCore 6.0.3
-
-Microsoft.EntityFrameworkCore.Proxies 6.0.3
-
-Microsoft.EntityFrameworkCore.SqlServer 6.0.3
-
-Microsoft.EntityFrameworkCore.Tools 6.0.3
-
-Microsoft.VisualStudio.Web.CodeGeneration.Design 6.0.2
-
-Swashbuckle.AspNetCore 6.3.0
+- Framework .NET 6.0
+- AutoMapper.Extensions.Microsoft.DependencyInjection 11.0.0
+- FluentResults 3.3.0
+- Microsoft.EntityFrameworkCore 6.0.3
+- Microsoft.EntityFrameworkCore.Proxies 6.0.3
+- Microsoft.EntityFrameworkCore.SqlServer 6.0.3
+- Microsoft.EntityFrameworkCore.Tools 6.0.3
+- Microsoft.VisualStudio.Web.CodeGeneration.Design 6.0.2
+- Swashbuckle.AspNetCore 6.3.0
 
 ## Estoque e Lote
 
