@@ -43,18 +43,22 @@ namespace EstoqueAPI.Controllers
         }
 
         #region [Swagger]
-        [SwaggerResponse(200, "Sucesso. Retorna o Produto cadastrado do id fornecido.", typeof(IEnumerable<ReadProdutoDTO>))]
-        [SwaggerResponse(404, "Caso o produto não seja encontrado no banco de dados.")]
+        [SwaggerResponse(200, "Sucesso. Retorna o Produto relativo ao id fornecido.", typeof(IEnumerable<ReadProdutoDTO>))]
+        [SwaggerResponse(204, "Caso o produto não seja encontrado no banco de dados.")]
         [SwaggerOperation(
-            Summary = "Recupera o produto cadastrado.",
-            Description = "Requer privilégios de acesso. Retorna o Produto cadastrado."
+            Summary = "Recupera um produto cadastrado.",
+            Description = "Requer privilégios de acesso. Retorna um Produto cadastrado passando seu Id como parâmetro."
         )]
         #endregion
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetProdutoPorId")]
         public IActionResult Get(int id)
         {
-            ReadProdutoDTO produtoDTO = produtoBusiness.GetProduto(id);
-            return Ok(produtoDTO);
+            ReadProdutoDTO produto = produtoBusiness.GetProduto(id);
+
+            if (produto == null)
+                return NoContent();
+
+            return Ok(produto);
         }
         
         #region [Swagger]
