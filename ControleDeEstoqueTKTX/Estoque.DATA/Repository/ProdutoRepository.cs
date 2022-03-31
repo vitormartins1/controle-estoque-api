@@ -46,12 +46,12 @@ namespace Estoque.DATA.Repository
             return mapper.Map<ReadProdutoDTO>(produtoConsultado);
         }
 
-        public IEnumerable<ReadProdutoDTO> GetProdutos()
+        public List<ReadProdutoDTO> GetProdutos()
         {
-            IEnumerable<Produto> produtosConsultados = context.Produto.ToList().AsEnumerable();
+            List<Produto> produtosConsultados = context.Produto.ToList();
             if (produtosConsultados == null) return null;
 
-            return mapper.Map<IEnumerable<ReadProdutoDTO>>(produtosConsultados);
+            return mapper.Map<List<ReadProdutoDTO>>(produtosConsultados);
         }
 
         public ReadProdutoDTO PostProduto(CreateProdutoDTO produtoDTO)

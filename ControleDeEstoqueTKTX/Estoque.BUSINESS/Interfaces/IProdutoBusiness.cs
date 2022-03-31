@@ -11,7 +11,7 @@ namespace Estoque.BUSINESS.Interfaces
 {
     public interface IProdutoBusiness
     {
-        IEnumerable<ReadProdutoDTO> GetProdutos();
+        List<ReadProdutoDTO> GetProdutos();
         ReadProdutoDTO GetProduto(int id);
         ReadProdutoDTO PostProduto(CreateProdutoDTO produto);
         Result PutProduto(int id, UpdateProdutoDTO produto);

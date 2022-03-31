@@ -12,7 +12,7 @@ namespace Estoque.DATA.Interfaces
     public interface IVendaRepository
     {
         Venda GetVendaPorId(int id);
-        IEnumerable<Venda> GetVendas();
+        List<Venda> GetVendas();
         Venda PostVenda(CreateVendaDTO venda);
         Result PutVenda(int id, UpdateVendaDTO venda);
         Result DeleteVenda(int id);

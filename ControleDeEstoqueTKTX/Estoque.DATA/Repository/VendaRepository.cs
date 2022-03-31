@@ -23,9 +23,9 @@ namespace Estoque.DATA.Repository
             this.mapper = mapper;
         }
 
-        public IEnumerable<Venda> GetVendas()
+        public List<Venda> GetVendas()
         {
-            IEnumerable<Venda> vendasConsultadas = context.Venda.ToList().AsEnumerable();
+            List<Venda> vendasConsultadas = context.Venda.ToList();
 
             if (vendasConsultadas == null)
                 return null;

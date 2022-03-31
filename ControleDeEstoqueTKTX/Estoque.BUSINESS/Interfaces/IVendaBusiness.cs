@@ -11,7 +11,7 @@ namespace Estoque.BUSINESS.Interfaces
 {
     public interface IVendaBusiness
     {
-        public IEnumerable<Venda> GetVendas();
+        List<Venda> GetVendas();
         Venda GetVendaPorId(int id);
         Venda PostVenda(CreateVendaDTO venda);
         Result PutVenda(int id, UpdateVendaDTO venda);

@@ -19,20 +19,28 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    options.SwaggerDoc("v1", new OpenApiInfo 
-    { 
-        Title = "Estoque API", 
-        Version = "v1" ,
-        Description = "API de gerenciamento de estoque que compõe um sistema de contas a pagar e controle de produtos."
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Estoque API",
+        Version = "v1",
+        Description = "API de gerenciamento de estoque que compõe um sistema de contas a pagar e controle de produtos.",
+        Contact = new OpenApiContact
+        {
+            Name = "Vitor Martins",
+            Url = new Uri("https://github.com/vitormartins1")
+        }
     });
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     options.IncludeXmlComments(xmlPath);
     options.DocumentFilter<PathLowercaseDocumentFilter>();
-
+    options.EnableAnnotations();
     var security = new Dictionary<string, IEnumerable<string>>
     {
-        {"Bearer", new string[] { }},
+        {
+            "Bearer", 
+            new string[] { }
+        },
     };
 
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
@@ -75,7 +83,7 @@ if (app.Environment.IsDevelopment())
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "Estoque API v1");
         //options.SwaggerEndpoint("/docs/api/v1/swagger.json", "Estoque API v1");
         //options.RoutePrefix = "docs/api";
-        //options.InjectStylesheet("/swagger-ui/theme-outline.css");
+        //options.InjectStylesheet("/swagger-ui/theme-material.css");
     });
 }
 

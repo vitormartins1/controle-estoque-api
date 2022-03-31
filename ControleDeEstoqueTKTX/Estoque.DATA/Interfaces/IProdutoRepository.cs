@@ -11,7 +11,7 @@ namespace Estoque.DATA.Interfaces
 {
     public interface IProdutoRepository
     {
-        IEnumerable<ReadProdutoDTO> GetProdutos();
+        List<ReadProdutoDTO> GetProdutos();
         ReadProdutoDTO GetProdutoPorId(int id);
         ReadProdutoDTO PostProduto(CreateProdutoDTO produtoDTO);
         Result PutProduto(int id, UpdateProdutoDTO produto);

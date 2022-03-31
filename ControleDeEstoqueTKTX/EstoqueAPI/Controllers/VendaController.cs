@@ -3,11 +3,14 @@ using Estoque.DATA.DTO.Venda;
 using Estoque.DOMAIN.Models;
 using FluentResults;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace EstoqueAPI.Controllers
 {
     [ApiController]
+    [ApiConventionType(typeof(DefaultApiConventions))]
     [Route("api/[controller]")]
+    [Produces("text/json")]
     public class VendaController : ControllerBase
     {
         private IVendaBusiness vendaBusiness;
@@ -39,6 +42,14 @@ namespace EstoqueAPI.Controllers
         }
 
         [HttpPost]
+        [SwaggerResponse(201, "", typeof(ReadVendaDTO))]
+        [SwaggerResponse(400, "")]
+        [SwaggerOperation(
+            Summary = "Cadastra uma nova Venda.",
+            Description = "Requer privilégios de administrador para cadastrar novas Vendas. \n Retorna a Venda cadastrado.",
+            OperationId = "CriaVenda",
+            Tags = new[] { "Venda" }
+        )]
         public IActionResult Post([FromBody] CreateVendaDTO venda)
         {
             Venda vendaSalva = vendaBusiness.PostVenda(venda);

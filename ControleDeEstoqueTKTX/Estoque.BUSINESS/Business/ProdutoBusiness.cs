@@ -26,9 +26,9 @@ namespace Estoque.BUSINESS.Business
             return produtoConsultado;
         }
 
-        public IEnumerable<ReadProdutoDTO> GetProdutos()
+        public List<ReadProdutoDTO> GetProdutos()
         {
-            IEnumerable<ReadProdutoDTO> produtos = produtoRepository.GetProdutos();
+            List<ReadProdutoDTO> produtos = produtoRepository.GetProdutos();
             return produtos;
         }
 

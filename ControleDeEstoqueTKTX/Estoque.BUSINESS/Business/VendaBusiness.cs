@@ -32,9 +32,9 @@ namespace Estoque.BUSINESS.Business
             return venda;
         }
 
-        public IEnumerable<Venda> GetVendas()
+        public List<Venda> GetVendas()
         {
-            IEnumerable<Venda> vendas = vendaRepository.GetVendas();
+            List<Venda> vendas = vendaRepository.GetVendas();
             return vendas;
         }
 
