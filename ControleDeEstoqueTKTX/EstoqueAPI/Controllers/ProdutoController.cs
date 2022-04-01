@@ -19,7 +19,7 @@ namespace EstoqueAPI.Controllers
         {
             this.produtoBusiness = produtoBusiness;
         }
-        
+
         #region [Swagger]
         [SwaggerResponse(200, "Sucesso. Retorna o enumerado de Produtos cadastrados.", typeof(List<ReadProdutoDTO>))]
         [SwaggerResponse(204, "Consulta feita com sucesso porém nenhum Produto foi encontrado.")]
@@ -60,7 +60,7 @@ namespace EstoqueAPI.Controllers
 
             return Ok(produto);
         }
-        
+
         #region [Swagger]
         [SwaggerResponse(200, "O Produto foi criado com sucesso.", typeof(ReadProdutoDTO))]
         [SwaggerResponse(400, "Os dados do Produto são inválidos.")]
@@ -84,17 +84,36 @@ namespace EstoqueAPI.Controllers
             }
         }
 
+        #region [Swagger]
+        [SwaggerResponse(204, "O Produto foi atualizado com sucesso.", null, "oioi", "reirei")]
+        [SwaggerResponse(400, "A requisição de atualização do Produto não foi concluída.")]
+        [SwaggerResponse(404, "O Produto não foi encontrado.")]
+        [SwaggerOperation(
+            Summary = "Atualiza um Produto.",
+            Description = "Requer privilégios de administrador para atualizar um Produto. Não retorna conteúdo."
+        )]
+        #endregion
         [HttpPut("{id}")]
-        public IActionResult Put(int id, UpdateProdutoDTO produto)
+        public IActionResult Put(int id,
+            [FromBody, SwaggerRequestBody("Os valores do Produto a ser atualizado.", Required = true)] UpdateProdutoDTO produto)
         {
             Result result = produtoBusiness.PutProduto(id, produto);
 
             if (result.IsFailed)
                 return BadRequest();
 
-            return Ok();
+            return NoContent();
         }
 
+        #region [Swagger]
+        [SwaggerResponse(204, "O Produto foi excluido com sucesso.")]
+        [SwaggerResponse(400, "A requisição de exclusão do Produto não foi concluída.")]
+        [SwaggerResponse(404, "O Produto não foi encontrado para que a exclusão possa ser feita.")]
+        [SwaggerOperation(
+            Summary = "Exclui um Produto.",
+            Description = "Requer privilégios de administrador para excluir um Produto. Não retorna conteúdo."
+        )]
+        #endregion
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

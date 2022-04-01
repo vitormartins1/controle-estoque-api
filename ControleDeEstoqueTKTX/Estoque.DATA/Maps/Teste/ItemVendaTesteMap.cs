@@ -15,10 +15,14 @@ namespace Estoque.DOMAIN.Diagrams
         {
             builder.ToTable(nameof(ItemVendaTeste));
 
+            builder
+                .Property(i => i.VendaTesteId)
+                .IsRequired();
+
             //builder
-            //    .HasOne<Produto>(i => i.Produto)
-            //    .WithOne()
-            //    .HasForeignKey<ItemVendaTeste>(i => i.ProdutoId)
+            //    .HasOne<Produto>()
+            //    .WithMany()
+            //    .HasForeignKey(i => i.ProdutoId)
             //    .HasConstraintName("FK_ItemVendaTeste_Produto");
         }
 

@@ -8,7 +8,24 @@ namespace Estoque.DOMAIN.Diagrams
     {
         public void Configure(EntityTypeBuilder<VendaTeste> builder)
         {
-            builder.ToTable(nameof(VendaTeste));
+            builder.ToTable(nameof(VendaTeste))
+                .HasKey(v => v.Id);
+
+            builder
+                .Property(v => v.Id)
+                .ValueGeneratedOnAdd();
+
+            builder
+                .Property(v => v.NumeroPedido)
+                .HasColumnType("VARCHAR")
+                .HasMaxLength(13);
+
+            builder
+                .HasMany<ItemVendaTeste>(venda => venda.ItemVendasTeste)
+                .WithOne()
+                .HasForeignKey(itemVenda => itemVenda.VendaTesteId)
+                .HasConstraintName("FK_VendaTeste_ItemVendaTeste")
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

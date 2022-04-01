@@ -17,18 +17,9 @@ namespace Estoque.DOMAIN.Diagrams
                 .ValueGeneratedOnAdd();
 
             builder
-                .Property(i => i.ProdutoId)
-                .IsRequired();
-
-            builder
                 .Property(i => i.Quantidade)
                 .IsRequired();
 
-            builder
-                .HasOne<Produto>(i => i.Produto)
-                .WithOne()
-                .HasForeignKey<Item>(i => i.ProdutoId)
-                .HasConstraintName("FK_Item_Produto");
         }
     }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EstoqueAPI.Migrations
 {
     [DbContext(typeof(EstoqueDbContext))]
-    [Migration("20220329161350_atualizando item-venda 2")]
-    partial class atualizandoitemvenda2
+    [Migration("20220401041923_teste de tpt")]
+    partial class testedetpt
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,9 +32,6 @@ namespace EstoqueAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("ProdutoId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
@@ -42,9 +39,6 @@ namespace EstoqueAPI.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProdutoId")
-                        .IsUnique();
 
                     b.ToTable("Item", (string)null);
                 });
@@ -295,8 +289,7 @@ namespace EstoqueAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProdutoId")
-                        .IsUnique();
+                    b.HasIndex("ProdutoId");
 
                     b.HasIndex("VendaId");
 
@@ -427,19 +420,14 @@ namespace EstoqueAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("ClienteId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("NumeroPedido")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasMaxLength(13)
+                        .HasColumnType("VARCHAR(13)");
 
                     b.Property<int>("TipoVenda")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ClienteId");
 
                     b.ToTable("VendaTeste", (string)null);
                 });
@@ -456,40 +444,24 @@ namespace EstoqueAPI.Migrations
                     b.ToTable("ItemVendaTeste", (string)null);
                 });
 
-            modelBuilder.Entity("Estoque.DOMAIN.Diagrams.Item", b =>
-                {
-                    b.HasOne("Estoque.DOMAIN.Models.Produto", "Produto")
-                        .WithOne()
-                        .HasForeignKey("Estoque.DOMAIN.Diagrams.Item", "ProdutoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_Item_Produto");
-
-                    b.Navigation("Produto");
-                });
-
             modelBuilder.Entity("Estoque.DOMAIN.Models.Compra", b =>
                 {
-                    b.HasOne("Estoque.DOMAIN.Models.Fornecedor", "Fornecedor")
+                    b.HasOne("Estoque.DOMAIN.Models.Fornecedor", null)
                         .WithMany("Compras")
                         .HasForeignKey("FornecedorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_Fornecedor_Compras");
-
-                    b.Navigation("Fornecedor");
                 });
 
             modelBuilder.Entity("Estoque.DOMAIN.Models.Consignado", b =>
                 {
-                    b.HasOne("Estoque.DOMAIN.Models.Revendedor", "Revendedor")
+                    b.HasOne("Estoque.DOMAIN.Models.Revendedor", null)
                         .WithMany("Consignados")
                         .HasForeignKey("RevendedorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_Revendedor_Consignados");
-
-                    b.Navigation("Revendedor");
                 });
 
             modelBuilder.Entity("Estoque.DOMAIN.Models.ItemConsignado", b =>
@@ -571,8 +543,8 @@ namespace EstoqueAPI.Migrations
             modelBuilder.Entity("Estoque.DOMAIN.Models.ItemVenda", b =>
                 {
                     b.HasOne("Estoque.DOMAIN.Models.Produto", null)
-                        .WithOne()
-                        .HasForeignKey("Estoque.DOMAIN.Models.ItemVenda", "ProdutoId")
+                        .WithMany()
+                        .HasForeignKey("ProdutoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_ItemVenda_Produto");
@@ -612,17 +584,6 @@ namespace EstoqueAPI.Migrations
                         .HasConstraintName("FK_Cliente_Vendas");
                 });
 
-            modelBuilder.Entity("Estoque.DOMAIN.Models.VendaTeste", b =>
-                {
-                    b.HasOne("Estoque.DOMAIN.Models.Cliente", "Cliente")
-                        .WithMany()
-                        .HasForeignKey("ClienteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cliente");
-                });
-
             modelBuilder.Entity("Estoque.DOMAIN.Diagrams.ItemVendaTeste", b =>
                 {
                     b.HasOne("Estoque.DOMAIN.Diagrams.Item", null)
@@ -635,7 +596,8 @@ namespace EstoqueAPI.Migrations
                         .WithMany("ItemVendasTeste")
                         .HasForeignKey("VendaTesteId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK_VendaTeste_ItemVendaTeste");
                 });
 
             modelBuilder.Entity("Estoque.DOMAIN.Models.Cliente", b =>

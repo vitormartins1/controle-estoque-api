@@ -129,15 +129,27 @@ namespace EstoqueAPI.UnitTests.Systems.Controllers
         public void GetProdutoPorId_OnNull_ReturnsStatusCode400()
         {
             // Arrange
+            
+            int id = It.IsAny<int>();
             var mockBusiness = new Mock<IProdutoBusiness>();
 
-            int id = It.IsAny<int>();
+            var produto = new ReadProdutoDTO
+            {
+                NomeProduto = null,
+                DescricaoProduto = null
+            };
+
+            mockBusiness
+                .Setup(m => m.GetProduto(id))
+                .Returns(produto);
 
             var sut = new ProdutoController(mockBusiness.Object);
+            Action act = () => sut.Get(id);
             sut.BadRequest();
 
+
             // Act
-            var result = sut.BadRequest();
+            var result = (NotFoundObjectResult)sut.Get(-10);
 
             // Assert
             result.StatusCode.Should().Be(400);
