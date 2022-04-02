@@ -1,5 +1,9 @@
 # Sistema de Gerenciamento de Estoque, Fornecedores e Revendedores
 
+# 
+
+API para controle e gerenciamento de estoque que compõe um sistema que controla contas a pagar a fornecedores e contas a receber de revendedores.
+
 ## Dependências
 
 - Framework .NET 6.0
@@ -16,6 +20,10 @@
 - Moq 4.17.2
 - xUnit 2.4.1
 
+## Entity Relationship Diagram
+
+![](EntityRelationshipDiagram/EstoqueEntityRelationshipDiagramv3.png "tktx online")
+
 ## Estoque e Lote
 
 O estoque é dividido em lotes que tem uma data de inicio quando são criados referente a chegada dos produtos na loja. O lote também armazena a quantidade de cada produto que chegou.
@@ -24,12 +32,15 @@ O estoque armazena o total dos lotes e quando a quantidade de produtos referente
 
 Organizar em lotes ajuda a ter um controle da duração dos produtos e controle de entrada e saida.
 
-## Entradas no estoque
+
+
+Entradas no estoque:
 
 - Compras => De Fornecedores ou da fabrica
 - Vendas => Que Retornaram (Devoluções, CEP Inexistene, Destinatário não Encontrado)
+- 
 
-## Saidas do estoque
+Saidas do estoque:
 
 - Vendas => Para Clientes do Site
 - Vendas => Para Clientes do WP
@@ -38,18 +49,24 @@ Organizar em lotes ajuda a ter um controle da duração dos produtos e controle 
 - Consignado => Para Revendedores (Status: Pendente, Pago, Quantidade Pendente e Quantidade Paga em quantidade de produtos.
 - Danificados => Produtos danificados no estoque ou durante o transporte ou que passaram da validade
 
-## Compras
+## Compra
 
 Compras servem para ter uma estimativa de tempo desde o pedido de compra com o fornecedor e a chegada a loja. Uma compra também estará associada a diversos lotes, para ter o dado de divergência dos produtos perdidos ou danificados durante o transporte.
 
 Compra tem uma relação de um para muitos com Lote, pois uma compra pode ter varios lotes e um lote só pode ter uma compra.
 
-## Usuarios
+## Usuario
 
 - Administrador (Acesso de criação de compras, aprovamento de baixa de lotes, criação de avisos de nivel estoque)
 - Funcionario (Entradas e baixas no estoque)
 - Revendedor (Solicitação de Venda ou Consignado)
 
-## Entity Relationship
+## Cliente, Fornecedor e Revendedor
 
-<img src="EntityRelationshipDiagram/EstoqueEntityRelationshipDiagramv3.png" title="tktx online">
+## Venda e Consignado
+
+## RegistroSaida e RegistroEntrada
+
+## Item
+
+## Produto
