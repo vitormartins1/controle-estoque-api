@@ -11,6 +11,10 @@
 - Microsoft.EntityFrameworkCore.Tools 6.0.3
 - Microsoft.VisualStudio.Web.CodeGeneration.Design 6.0.2
 - Swashbuckle.AspNetCore 6.3.0
+- FluentAssertions 6.5.1
+- Microsoft.NET.Test.Sdk 16.11.0
+- Moq 4.17.2
+- xUnit 2.4.1
 
 ## Estoque e Lote
 
@@ -48,4 +52,4 @@ Compra tem uma relação de um para muitos com Lote, pois uma compra pode ter va
 
 ## Entity Relationship
 
-<img src="EntityRelationshipDiagram/EstoqueEntityRelationshipDiagramv2.png" title="tktx online">
+<img src="EntityRelationshipDiagram/EstoqueEntityRelationshipDiagramv3.png" title="tktx online">

@@ -144,12 +144,9 @@ namespace EstoqueAPI.UnitTests.Systems.Controllers
                 .Returns(produto);
 
             var sut = new ProdutoController(mockBusiness.Object);
-            Action act = () => sut.Get(id);
-            sut.BadRequest();
-
 
             // Act
-            var result = (NotFoundObjectResult)sut.Get(-10);
+            var result = sut.BadRequest();
 
             // Assert
             result.StatusCode.Should().Be(400);
