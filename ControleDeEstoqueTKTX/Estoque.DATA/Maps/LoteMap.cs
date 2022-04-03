@@ -27,10 +27,10 @@ namespace Estoque.DATA.Maps
                 .HasDefaultValueSql("GETDATE()");
 
             builder
-                .HasMany<ItemEstoque>(lote => lote.ItemsEstoque)
+                .HasMany<Item>(lote => lote.Itens)
                 .WithOne()
-                .HasForeignKey(itemEstoque => itemEstoque.LoteId)
-                .HasConstraintName("FK_Lote_ItemsEstoque")
+                .HasForeignKey(itemEstoque => itemEstoque.Id)
+                .HasConstraintName("FK_Lote_Itens")
                 .OnDelete(DeleteBehavior.Restrict);
 
             //builder

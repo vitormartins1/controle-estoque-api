@@ -25,9 +25,9 @@ namespace Estoque.DATA.Maps
                 .HasConstraintName("FK_Revendedor_Consignados");
 
             builder
-                .HasMany<ItemConsignado>(x => x.ItemConsignados)
+                .HasMany<Item>(x => x.Itens)
                 .WithOne()
-                .HasForeignKey(x => x.ConsignadoId)
+                .HasForeignKey(x => x.Id)
                 .HasConstraintName("FK_Consignado_ItemConsignados");
         }
     }

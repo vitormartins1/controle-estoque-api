@@ -29,10 +29,10 @@ namespace Estoque.DATA.Maps
             //.OnDelete(DeleteBehavior)
 
             builder
-                .HasMany<ItemEstoque>(compra => compra.ItemsEstoque)
+                .HasMany<Item>(compra => compra.Itens)
                 .WithOne()
-                .HasForeignKey(itemEstoque => itemEstoque.CompraId)
-                .HasConstraintName("FK_Compra_ItemsEstoque");
+                .HasForeignKey(itemEstoque => itemEstoque.Id)
+                .HasConstraintName("FK_Compra_Itens");
 
             builder
                 .HasMany<Lote>(compra => compra.Lotes)

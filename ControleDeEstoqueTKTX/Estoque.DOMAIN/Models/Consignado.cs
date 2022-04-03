@@ -10,7 +10,7 @@ namespace Estoque.DOMAIN.Models
     {
         public int Id { get; set; }
         public int RevendedorId { get; set; }
-        public virtual ICollection<ItemConsignado> ItemConsignados { get; set; }
+        public virtual ICollection<Item> Itens { get; set; }
         public DateTime DataDeRegistro { get; set; }
     }
 }

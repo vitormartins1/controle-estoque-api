@@ -13,6 +13,6 @@ namespace Estoque.DATA.DTO.Venda
         public string? NumeroPedido { get; set; }
         public int ClienteId { get; set; }
         public TipoVenda TipoVenda { get; set; }
-        public virtual ICollection<ItemVenda>? ItemVendas { get; set; }
+        public virtual ICollection<Item>? Itens { get; set; }
     }
 }

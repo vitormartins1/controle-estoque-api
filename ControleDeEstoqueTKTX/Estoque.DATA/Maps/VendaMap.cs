@@ -32,10 +32,10 @@ namespace Estoque.DATA.Maps
             //.OnDelete(DeleteBehavior)
 
             builder
-                .HasMany<ItemVenda>(venda => venda.ItemVendas)
+                .HasMany<Item>(venda => venda.Itens)
                 .WithOne()
-                .HasForeignKey(itemVenda => itemVenda.VendaId)
-                .HasConstraintName("FK_Venda_ItemVendas")
+                .HasForeignKey(itemVenda => itemVenda.Id)
+                .HasConstraintName("FK_Venda_Item")
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

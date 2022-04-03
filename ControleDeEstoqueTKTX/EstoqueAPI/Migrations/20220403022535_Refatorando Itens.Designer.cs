@@ -4,6 +4,7 @@ using Estoque.DATA.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EstoqueAPI.Migrations
 {
     [DbContext(typeof(EstoqueDbContext))]
-    partial class EstoqueDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220403022535_Refatorando Itens")]
+    partial class RefatorandoItens
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -147,9 +149,14 @@ namespace EstoqueAPI.Migrations
                     b.Property<int>("Tipo")
                         .HasColumnType("int");
 
+                    b.Property<int?>("VendaRetornadaId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ProdutoId");
+
+                    b.HasIndex("VendaRetornadaId");
 
                     b.ToTable("Item", (string)null);
                 });
@@ -254,6 +261,22 @@ namespace EstoqueAPI.Migrations
                     b.ToTable("Venda", (string)null);
                 });
 
+            modelBuilder.Entity("Estoque.DOMAIN.Models.VendaRetornada", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("VendaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("VendaRetornada");
+                });
+
             modelBuilder.Entity("Estoque.DOMAIN.Models.Compra", b =>
                 {
                     b.HasOne("Estoque.DOMAIN.Models.Fornecedor", null)
@@ -310,6 +333,10 @@ namespace EstoqueAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_Item_Produto");
+
+                    b.HasOne("Estoque.DOMAIN.Models.VendaRetornada", null)
+                        .WithMany("Itens")
+                        .HasForeignKey("VendaRetornadaId");
                 });
 
             modelBuilder.Entity("Estoque.DOMAIN.Models.Lote", b =>
@@ -377,6 +404,11 @@ namespace EstoqueAPI.Migrations
                 });
 
             modelBuilder.Entity("Estoque.DOMAIN.Models.Venda", b =>
+                {
+                    b.Navigation("Itens");
+                });
+
+            modelBuilder.Entity("Estoque.DOMAIN.Models.VendaRetornada", b =>
                 {
                     b.Navigation("Itens");
                 });
