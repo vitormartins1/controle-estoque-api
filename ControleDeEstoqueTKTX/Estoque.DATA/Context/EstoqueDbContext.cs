@@ -35,11 +35,48 @@ namespace Estoque.DATA.Context
             modelBuilder.ApplyConfiguration(new RegistroMap());
             modelBuilder.ApplyConfiguration(new RevendedorMap());
             modelBuilder.ApplyConfiguration(new VendaMap());
+
+            DataSeeding(modelBuilder);
         }
 
         protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
         {
             configurationBuilder.Properties<string>().HaveMaxLength(200);
+        }
+
+        private void DataSeeding(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Produto>()
+                .HasData(
+                    new Produto
+                    {
+                        Id = 1,
+                        DescricaoProduto = "Brinquedo do heroi max stell.",
+                        NomeProduto = "Max Stell",
+                        ValorProduto = 67
+                    },
+                    new Produto
+                    {
+                        Id = 2,
+                        NomeProduto = "Hot Weels Parque dos Tubarões.",
+                        DescricaoProduto = "Brinquedo de carrinhos do parque dos tubarões.",
+                        ValorProduto = 189
+                    },
+                    new Produto
+                    {
+                        Id = 3,
+                        NomeProduto = "Miniatura Dark Souls",
+                        DescricaoProduto = "Miniatura do jogo de video game dark souls.",
+                        ValorProduto = 399
+                    },
+                    new Produto
+                    {
+                        Id = 4,
+                        NomeProduto = "Raquete elétrica",
+                        DescricaoProduto = "Raquete para matar moscas e mosquitos.",
+                        ValorProduto = 19
+                    }
+                );
         }
     }
 }
