@@ -31,6 +31,8 @@ namespace EstoqueAPI.Configuration
         {
             service.AddScoped<IProdutoRepository, ProdutoRepository>();
             service.AddScoped<IVendaRepository, VendaRepository>();
+            service.AddScoped<IItemRepository, ItemRepository>();
+            service.AddScoped<IEstoqueRepository, EstoqueRepository>();
 
             return service;
         }
@@ -39,6 +41,8 @@ namespace EstoqueAPI.Configuration
         {
             service.AddScoped<IProdutoBusiness, ProdutoBusiness>();
             service.AddScoped<IVendaBusiness, VendaBusiness>();
+            service.AddScoped<IItemBusiness, ItemBusiness>();
+            service.AddScoped<IEstoqueBusiness, EstoqueBusiness>();
 
             return service;
         }
