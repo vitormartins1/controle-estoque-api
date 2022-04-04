@@ -1,6 +1,6 @@
 ﻿namespace Estoque.DOMAIN.Models
 {
-    public class RegistroEntrada 
+    public class Registro 
     {
         public int Id { get; set; }
         public DateTime DataDeRegistro { get; set; }

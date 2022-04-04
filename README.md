@@ -1,6 +1,6 @@
 # Sistema de Gerenciamento de Estoque, Fornecedores e Revendedores
 
-# 
+
 
 API para controle e gerenciamento de estoque que compõe um sistema que controla contas a pagar a fornecedores e contas a receber de revendedores.
 
@@ -31,8 +31,6 @@ O estoque é dividido em lotes que tem uma data de inicio quando são criados re
 O estoque armazena o total dos lotes e quando a quantidade de produtos referente a um lote é vendida o Lote entra em mode de fechamento, abrindo uma solicitação de aprovação ao administrador do sistema.
 
 Organizar em lotes ajuda a ter um controle da duração dos produtos e controle de entrada e saida.
-
-
 
 Entradas no estoque:
 

@@ -23,7 +23,9 @@ builder.Services.AddSwaggerGen(options =>
     {
         Title = "Estoque API",
         Version = "v1",
-        Description = "API de gerenciamento de estoque que compõe um sistema de contas a pagar e controle de produtos.",
+        Description = "API para controle e gerenciamento de estoque que " +
+        "compõe um sistema que controla contas a pagar a fornecedores e " +
+        "contas a receber de revendedores.",
         Contact = new OpenApiContact
         {
             Name = "Vitor Martins",
